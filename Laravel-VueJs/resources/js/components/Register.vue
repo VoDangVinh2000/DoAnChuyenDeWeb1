@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="main-login main-center">
-                <form class="form-horizontal" method="post" action="#">
+                <form class="form-horizontal" method="post">
 
                     <div class="form-group">
                         <label for="name" class="cols-sm-2 control-label">Your Name</label>
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="form-group ">
-                        <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                        <button type="submit" @click.prevent="register" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                     </div>
                     <!-- <div class="login-register">
                         <a href="index.php">Login</a>
@@ -75,6 +75,11 @@
 <script>
 export default {
     name : 'Register.vue',
+    methods: {
+        register(){
+            console.log('register');
+        }
+    },
 }
 </script>
 
