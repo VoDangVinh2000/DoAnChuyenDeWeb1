@@ -1,5 +1,5 @@
 @extends('master')
 
 @section('content')
-    <register-component></register-component>
+    <register-views></register-views>
 @endsection
