@@ -22,7 +22,12 @@
         "vue-loader": "^16.8.1"
     },
     "dependencies": {
+<<<<<<< HEAD
         "save-dev": "0.0.1-security",
         "vue-router": "^4.0.11"
+=======
+        "vue-router": "^4.0.11",
+        "save-dev": "0.0.1-security"
+>>>>>>> d3ab45b713eb244e5df27108d7611b61ca374c23
     }
 }
