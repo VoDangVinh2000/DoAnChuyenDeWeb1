@@ -66,9 +66,7 @@
                     <div class="form-group">
                         <p>Already registered <a href="#">Login?</a></p>
                     </div>
-                    <!-- <div class="login-register">
-                        <a href="index.php">Login</a>
-                        </div> -->
+
                 </form>
             </div>
         </div>
