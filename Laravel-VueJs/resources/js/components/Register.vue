@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <div class="row main">
+        <div class="main">
             <div class="panel-heading">
                 <div class="panel-title text-center">
-                    <h1 class="title">Company Name</h1>
+                    <h1 class="title">Sign Up</h1>
                     <hr />
                 </div>
             </div>
@@ -61,7 +61,10 @@
                     </div>
 
                     <div class="form-group ">
-                        <button type="submit" @click.prevent="register" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                        <button type="submit" @click.prevent="register" class="btn btn-dark btn-lg btn-block login-button">Register</button>
+                    </div>
+                    <div class="form-group">
+                        <p>Already registered <a href="#">Login?</a></p>
                     </div>
                     <!-- <div class="login-register">
                         <a href="index.php">Login</a>
@@ -77,7 +80,7 @@ export default {
     name : 'Register.vue',
     methods: {
         register(){
-            console.log('register');
+            console.log('hello');
         }
     },
 }
@@ -100,32 +103,56 @@ body, html{
 }
 
 .main{
- 	margin-top: 70px;
+ 	margin-top: 30px;
 }
 
 h1.title {
 	font-size: 50px;
 	font-family: 'Passion One', cursive;
 	font-weight: 400;
+    color: #fff;
 }
 
 hr{
-	width: 10%;
-	color: #fff;
+	width: 20%;
+    height: 4px;
+    color: #fff;
+    background: #fff;
+    border-radius: 6px;
+    margin-bottom: 30px;
 }
 
 .form-group{
-	margin-bottom: 15px;
+	margin-bottom: 10px;
+}
+
+.main-center[data-v-97358ae4]{
+    max-width: 500px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    padding: 25px 40px;
 }
 
 label{
-	margin-bottom: 15px;
+	margin-bottom: 10px;
+    font-weight: 500;
+}
+
+input.form-control{
+    border: 1px solid #ced4da;
+    border-radius: 7px !important;
+    font-size: 15px;
 }
 
 input,
 input::-webkit-input-placeholder {
-    font-size: 11px;
+    font-size: 15px;
     padding-top: 3px;
+}
+
+.form-control:focus {
+  border-color: #2554FF;
+  box-shadow: none;
 }
 
 .main-login{
@@ -134,9 +161,10 @@ input::-webkit-input-placeholder {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+    /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+    /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 
 }
 
