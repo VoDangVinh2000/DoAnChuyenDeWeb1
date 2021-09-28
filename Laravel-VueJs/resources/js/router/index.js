@@ -1,5 +1,6 @@
-import Register from "../components/Register";
+// import Register from "../components/Register";
 import { createWebHistory, createRouter } from "vue-router";
+import Register from "../views/Register.vue";
 const routes = [
     {
         name: "regsiter",
