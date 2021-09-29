@@ -21,3 +21,6 @@ Route::get('/register',function(){
 Route::post('register_test',function(){
     return request();
 });
+Route::get('/login',function(){
+    return view('app.login');
+});

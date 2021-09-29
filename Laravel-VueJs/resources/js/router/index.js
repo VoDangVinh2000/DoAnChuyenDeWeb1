@@ -7,6 +7,11 @@ const routes = [
         path: "/register",
         component: Register,
     },
+    {
+        name: "login",
+        path: "/login",
+        component: Register,
+    },
 ];
 
 const router = createRouter({
