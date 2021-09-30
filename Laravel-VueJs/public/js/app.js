@@ -19455,11 +19455,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Login.vue',
   data: function data() {
-    return {};
+    return {
+      email: '',
+      password: '',
+      mess_validation: []
+    };
   },
-  methods: {}
+  mounted: function mounted() {
+    var token = localStorage.getItem('user'); //get token if null => back home page
+
+    if (token != null) {
+      window.location.href = '/home';
+    }
+  },
+  methods: {
+    validateEmail: function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
+    login: function login() {
+      var c_mess_validation = document.querySelector('#mess_validation');
+      this.mess_validation = [];
+      c_mess_validation.innerHTML = ""; //check empty input
+
+      if (this.email == "" || this.password == "") {
+        this.mess_validation.push("Vui lòng nhập thông tin đăng nhập!");
+        return;
+      } //validation email
+
+
+      if (this.validateEmail(this.email) != true) {
+        this.mess_validation.push("Vui lòng nhập khớp định dạng email!");
+        return;
+      }
+
+      try {
+        axios.post('/login', {
+          email: this.email,
+          password: this.password
+        }).then(function (response) {
+          if (response.data != null) {
+            var item = localStorage.getItem('user');
+
+            if (Date.now() > item.time) {
+              localStorage.removeItem('user');
+            } //create localstorage
+
+
+            var obj = {
+              time: new Date().getTime() + 60 * 1000,
+              value: response.data
+            };
+            var objStr = JSON.stringify(obj);
+            localStorage.setItem('user', objStr);
+            window.location.href = '/';
+          } else {
+            c_mess_validation.innerHTML = "Thông tin tài khoản hoặc mật khẩu không đúng";
+            return;
+          }
+        });
+      } catch (error) {
+        this.msg = error.response.data.msg;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -19479,17 +19539,31 @@ __webpack_require__.r(__webpack_exports__);
   name: "Register.vue",
   data: function data() {
     return {
-      email: "",
-      username: ""
+      users: {
+        name: "",
+        email: "",
+        username: "",
+        password: "",
+        confirmpassword: ""
+      },
+      //   errors: [],
+      check: false
     };
   },
   methods: {
     register: function register() {
-      axios.post("register_test", {
-        email: this.email,
-        username: this.username
+      var _this = this;
+
+      axios.post("/register_test", {
+        name: this.users.name,
+        email: this.users.email,
+        username: this.users.username,
+        password: this.users.password,
+        confirmpassword: this.users.confirmpassword
       }).then(function (response) {
-        return console.log(response);
+        return _this.check = true;
+      })["catch"](function (error) {
+        _this.errors = error.response.data.error.name;
       });
     }
   }
@@ -19558,90 +19632,101 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-2 mx-auto"
+  "class": "vue-tempalte"
 };
 var _hoisted_2 = {
-  "class": "card card0 border-0"
+  "class": "container"
 };
-var _hoisted_3 = {
-  "class": "row d-flex justify-content-center"
-};
+
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+    "class": "title"
+  }, "Log In", -1
+  /* HOISTED */
+  );
+});
+
 var _hoisted_4 = {
-  "class": "col-lg-6"
+  "class": "main-center"
 };
 var _hoisted_5 = {
-  "class": "card2 card border-0 px-4 py-5"
+  style: {
+    "color": "red"
+  }
 };
 
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "row"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "col-md col-sm text-center"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mb-1"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-    "class": "mb-0"
-  }, "Login")])])], -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    style: {
+      "color": "red"
+    },
+    id: "mess_validation"
+  }, null, -1
   /* HOISTED */
   );
 });
 
 var _hoisted_7 = {
-  "class": "row px-3"
+  "class": "form-group"
 };
 
 var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mb-1"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
-    "class": "mb-0 text-sm"
-  }, "Email Address")], -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Email address", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
-
-var _hoisted_10 = {
-  "class": "row px-3"
+var _hoisted_9 = {
+  "class": "form-group"
 };
 
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mb-1"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
-    "class": "mb-0 text-sm"
-  }, "Password")], -1
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Password", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row px-3 mb-4\" data-v-6bdc8b8e><div class=\"custom-control custom-checkbox custom-control-inline\" data-v-6bdc8b8e><input id=\"chk1\" type=\"checkbox\" name=\"chk\" class=\"custom-control-input\" data-v-6bdc8b8e> <label for=\"chk1\" class=\"custom-control-label text-sm\" data-v-6bdc8b8e>Remember me</label></div> <a href=\"#\" class=\"ml-auto mb-0 text-sm\" data-v-6bdc8b8e>Forgot Password?</a></div><div class=\"row mb-3 px-3\" data-v-6bdc8b8e><button type=\"submit\" class=\"btn btn-blue text-center\" data-v-6bdc8b8e>Login</button></div><div class=\"row mb-4 px-3\" data-v-6bdc8b8e><small class=\"font-weight-bold\" data-v-6bdc8b8e>Don&#39;t have an account? <a href=\"/register\" class=\"text-danger\" data-v-6bdc8b8e>Register</a></small></div>", 3);
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": "forgot-password text-right mt-2 mb-4"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "btn btn-outline-info btn-block btn-lg a_signup",
+    href: "/register"
+  }, "Sign up")], -1
+  /* HOISTED */
+  );
+});
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-lg-6\">\n                    <div class=\"card1 pb-5\">\n                        <div class=\"row\"> <img src=\"https://i.imgur.com/CXQmsmF.png\" class=\"logo\"> </div>\n                        <div class=\"row px-3 justify-content-center mt-4 mb-5 border-line\"> <img src=\"https://i.imgur.com/uNGdWHi.png\" class=\"image\"> </div>\n                    </div>\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "mb-4",
-    type: "text",
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.mess_validation, function (mess) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(mess), 1
+    /* TEXT */
+    );
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  )), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.email = $event;
+      return $data.email = $event;
     }),
-    name: "email",
-    placeholder: "Enter a valid email address"
+    type: "text",
+    "class": "form-control form-control-lg"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "password",
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.password = $event;
+      return $data.password = $event;
     }),
-    name: "password",
-    placeholder: "Enter password"
+    type: "password",
+    "class": "form-control form-control-lg"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.password]])]), _hoisted_13])])])])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "submit",
+    onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.login && $options.login.apply($options, arguments);
+    }, ["prevent"])),
+    "class": "btn btn-outline-info btn-lg btn-block btn_signin"
+  }, " Sign In "), _hoisted_11])])])]);
 }
 
 /***/ }),
@@ -19690,31 +19775,242 @@ var _hoisted_5 = {
   "class": "form-horizontal",
   method: "post"
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"form-group\" data-v-97358ae4><label for=\"name\" class=\"cols-sm-2 control-label\" data-v-97358ae4>Your Name</label><div class=\"cols-sm-10\" data-v-97358ae4><div class=\"input-group\" data-v-97358ae4><span class=\"input-group-addon\" data-v-97358ae4><i class=\"fa fa-user fa\" aria-hidden=\"true\" data-v-97358ae4></i></span><input type=\"text\" class=\"form-control\" name=\"name\" id=\"name\" placeholder=\"Enter your Name\" data-v-97358ae4></div></div></div><div class=\"form-group\" data-v-97358ae4><label for=\"email\" class=\"cols-sm-2 control-label\" data-v-97358ae4>Your Email</label><div class=\"cols-sm-10\" data-v-97358ae4><div class=\"input-group\" data-v-97358ae4><span class=\"input-group-addon\" data-v-97358ae4><i class=\"fa fa-envelope fa\" aria-hidden=\"true\" data-v-97358ae4></i></span><input type=\"text\" class=\"form-control\" name=\"email\" id=\"email\" placeholder=\"Enter your Email\" data-v-97358ae4></div></div></div><div class=\"form-group\" data-v-97358ae4><label for=\"username\" class=\"cols-sm-2 control-label\" data-v-97358ae4>Username</label><div class=\"cols-sm-10\" data-v-97358ae4><div class=\"input-group\" data-v-97358ae4><span class=\"input-group-addon\" data-v-97358ae4><i class=\"fa fa-users fa\" aria-hidden=\"true\" data-v-97358ae4></i></span><input type=\"text\" class=\"form-control\" name=\"username\" id=\"username\" placeholder=\"Enter your Username\" data-v-97358ae4></div></div></div><div class=\"form-group\" data-v-97358ae4><label for=\"password\" class=\"cols-sm-2 control-label\" data-v-97358ae4>Password</label><div class=\"cols-sm-10\" data-v-97358ae4><div class=\"input-group\" data-v-97358ae4><span class=\"input-group-addon\" data-v-97358ae4><i class=\"fa fa-lock fa-lg\" aria-hidden=\"true\" data-v-97358ae4></i></span><input type=\"password\" class=\"form-control\" name=\"password\" id=\"password\" placeholder=\"Enter your Password\" data-v-97358ae4></div></div></div><div class=\"form-group\" data-v-97358ae4><label for=\"confirm\" class=\"cols-sm-2 control-label\" data-v-97358ae4>Confirm Password</label><div class=\"cols-sm-10\" data-v-97358ae4><div class=\"input-group\" data-v-97358ae4><span class=\"input-group-addon\" data-v-97358ae4><i class=\"fa fa-lock fa-lg\" aria-hidden=\"true\" data-v-97358ae4></i></span><input type=\"password\" class=\"form-control\" name=\"confirm\" id=\"confirm\" placeholder=\"Confirm your Password\" data-v-97358ae4></div></div></div>", 5);
-
-var _hoisted_11 = {
+var _hoisted_6 = {
+  key: 0,
+  "class": "label label-success"
+};
+var _hoisted_7 = {
   "class": "form-group"
 };
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "name",
+    "class": "cols-sm-2 control-label"
+  }, "Your Name", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_9 = {
+  "class": "cols-sm-10"
+};
+var _hoisted_10 = {
+  "class": "input-group"
+};
+
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "input-group-addon"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa fa-user fa",
+    "aria-hidden": "true"
+  })], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_12 = {
+  "class": "form-group"
+};
+
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "email",
+    "class": "cols-sm-2 control-label"
+  }, "Your Email", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_14 = {
+  "class": "cols-sm-10"
+};
+var _hoisted_15 = {
+  "class": "input-group"
+};
+
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "input-group-addon"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa fa-envelope fa",
+    "aria-hidden": "true"
+  })], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_17 = {
+  "class": "form-group"
+};
+
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "username",
+    "class": "cols-sm-2 control-label"
+  }, "Username", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_19 = {
+  "class": "cols-sm-10"
+};
+var _hoisted_20 = {
+  "class": "input-group"
+};
+
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "input-group-addon"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa fa-users fa",
+    "aria-hidden": "true"
+  })], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_22 = {
+  "class": "form-group"
+};
+
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "password",
+    "class": "cols-sm-2 control-label"
+  }, "Password", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_24 = {
+  "class": "cols-sm-10"
+};
+var _hoisted_25 = {
+  "class": "input-group"
+};
+
+var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "input-group-addon"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa fa-lock fa-lg",
+    "aria-hidden": "true"
+  })], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_27 = {
+  "class": "form-group"
+};
+
+var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "confirm",
+    "class": "cols-sm-2 control-label"
+  }, "Confirm Password", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_29 = {
+  "class": "cols-sm-10"
+};
+var _hoisted_30 = {
+  "class": "input-group"
+};
+
+var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "input-group-addon"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa fa-lock fa-lg",
+    "aria-hidden": "true"
+  })], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_32 = {
+  "class": "form-group"
+};
+
+var _hoisted_33 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "form-group"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Already registered "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: "#"
+    href: "/login"
   }, "Login?")])], -1
   /* HOISTED */
   );
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"error\" v-if=\"errors.length\">\r\n                <span v-for=\"(err, index) of errors\" :key=\"index\">\r\n                    {{ err}}\r\n                </span>\r\n            </div> "), $data.check ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_6, "Sign Up Success")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.users.name = $event;
+    }),
+    "class": "form-control",
+    name: "name",
+    id: "name",
+    placeholder: "Enter your Name"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.name]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    name: "email",
+    id: "email",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.users.email = $event;
+    }),
+    placeholder: "Enter your Email"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.email]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    name: "username",
+    id: "username",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.users.username = $event;
+    }),
+    placeholder: "Enter your Username"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.username]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "password",
+    "class": "form-control",
+    name: "password",
+    id: "password",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.users.password = $event;
+    }),
+    placeholder: "Enter your Password"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.password]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "password",
+    "class": "form-control",
+    name: "confirmpassword",
+    id: "confirm",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.users.confirmpassword = $event;
+    }),
+    placeholder: "Confirm your Password"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.confirmpassword]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
-    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.register && $options.register.apply($options, arguments);
     }, ["prevent"])),
     "class": "btn btn-dark btn-lg btn-block login-button"
-  }, "Register")]), _hoisted_12])])])]);
+  }, " Register ")]), _hoisted_33])])])]);
 }
 
 /***/ }),
@@ -19829,9 +20125,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var _views_Register_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/Register.vue */ "./resources/js/views/Register.vue");
+/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/Login.vue */ "./resources/js/views/Login.vue");
 // import Register from "../components/Register";
+
 
 
 var routes = [{
@@ -19841,10 +20139,10 @@ var routes = [{
 }, {
   name: "login",
   path: "/login",
-  component: _views_Register_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createWebHistory)(),
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter)({
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createWebHistory)(),
   routes: routes
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -19868,7 +20166,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-6bdc8b8e] {\n    color: #000;\n    overflow-x: hidden;\n    height: 100%;\n    background-color: #B0BEC5;\n    background-repeat: no-repeat\n}\n.card0[data-v-6bdc8b8e] {\n    box-shadow: 0px 4px 8px 0px #757575;\n    border-radius: 0px;\n}\n.card2[data-v-6bdc8b8e] {\n    margin: 0px 40px;\n}\n.border-line[data-v-6bdc8b8e] {\n    border-right: 1px solid #EEEEEE\n}\n.linkedin[data-v-6bdc8b8e] {\n    background-color: #2867B2;\n    color: #fff;\n    font-size: 18px;\n    padding-top: 5px;\n    border-radius: 50%;\n    width: 35px;\n    height: 35px;\n    cursor: pointer\n}\n.line[data-v-6bdc8b8e] {\n    height: 1px;\n    width: 45%;\n    background-color: #E0E0E0;\n    margin-top: 10px\n}\n.or[data-v-6bdc8b8e] {\n    width: 10%;\n    font-weight: bold\n}\n.text-sm[data-v-6bdc8b8e] {\n    font-size: 14px !important\n}\n[data-v-6bdc8b8e]::-moz-placeholder {\n    color: #BDBDBD;\n    opacity: 1;\n    font-weight: 300\n}\n[data-v-6bdc8b8e]:-ms-input-placeholder {\n    color: #BDBDBD;\n    opacity: 1;\n    font-weight: 300\n}\n[data-v-6bdc8b8e]::placeholder {\n    color: #BDBDBD;\n    opacity: 1;\n    font-weight: 300\n}\n[data-v-6bdc8b8e]:-ms-input-placeholder {\n    color: #BDBDBD;\n    font-weight: 300\n}\n[data-v-6bdc8b8e]::-ms-input-placeholder {\n    color: #BDBDBD;\n    font-weight: 300\n}\ninput[data-v-6bdc8b8e],\ntextarea[data-v-6bdc8b8e] {\n    padding: 10px 12px 10px 12px;\n    border: 1px solid lightgrey;\n    border-radius: 2px;\n    margin-bottom: 5px;\n    margin-top: 2px;\n    width: 100%;\n    box-sizing: border-box;\n    color: #2C3E50;\n    font-size: 14px;\n    letter-spacing: 1px\n}\ninput[data-v-6bdc8b8e]:focus,\ntextarea[data-v-6bdc8b8e]:focus {\n    box-shadow: none !important;\n    border: 1px solid #304FFE;\n    outline-width: 0\n}\nbutton[data-v-6bdc8b8e]:focus {\n    box-shadow: none !important;\n    outline-width: 0\n}\na[data-v-6bdc8b8e] {\n    color: inherit;\n    cursor: pointer\n}\n.btn-blue[data-v-6bdc8b8e] {\n    background-color: #1A237E;\n    width: 150px;\n    color: #fff;\n    border-radius: 2px\n}\n.btn-blue[data-v-6bdc8b8e]:hover {\n    background-color: #000;\n    cursor: pointer\n}\n.bg-blue[data-v-6bdc8b8e] {\n    color: #fff;\n    background-color: #1A237E\n}\n@media screen and (max-width: 991px) {\n.logo[data-v-6bdc8b8e] {\n        margin-left: 0px\n}\n.image[data-v-6bdc8b8e] {\n        width: 300px;\n        height: 220px\n}\n.border-line[data-v-6bdc8b8e] {\n        border-right: none\n}\n.card2[data-v-6bdc8b8e] {\n        border-top: 1px solid #EEEEEE !important;\n        margin: 0px 15px\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nhtml[data-v-6bdc8b8e] {\n  height: 100%;\n  background-repeat: no-repeat;\n  background-color: #d3d3d3;\n  font-family: \"Oxygen\", sans-serif;\n}\n.main[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\nh1.title[data-v-6bdc8b8e] {\n  font-size: 50px;\n  font-family: \"Passion One\", cursive;\n  font-weight: 400;\n  color: #fff;\n  text-align: center;\n  margin: 40px 0;\n}\nhr[data-v-6bdc8b8e] {\n  width: 20%;\n  height: 4px;\n  color: #fff;\n  background: #fff;\n  border-radius: 6px;\n  margin-bottom: 30px;\n}\n.form-group[data-v-6bdc8b8e] {\n  margin-bottom: 10px;\n}\n.main-center[data-v-6bdc8b8e][data-v-6bdc8b8e] {\n  max-width: 500px;\n  margin-bottom: 30px;\n  border-radius: 15px;\n  padding: 25px 40px;\n  background: #fff;\n}\nlabel[data-v-6bdc8b8e] {\n  margin-bottom: 10px;\n  font-weight: 500;\n}\nlabel.lable-success[data-v-6bdc8b8e] {\n  text-align: center;\n  display: inherit;\n  background: antiquewhite;\n  padding: 15px 0;\n  border-radius: 15px;\n  color: brown;\n  font-weight: 600;\n  letter-spacing: 0.5px;\n}\ninput.form-control[data-v-6bdc8b8e] {\n  border: 1px solid #ced4da;\n  border-radius: 7px !important;\n  font-size: 15px;\n}\ninput[data-v-6bdc8b8e],\ninput[data-v-6bdc8b8e]::-webkit-input-placeholder {\n  font-size: 15px;\n  padding-top: 3px;\n}\n.form-control[data-v-6bdc8b8e]:focus {\n  border-color: #2554ff;\n  box-shadow: none;\n}\n.main-login[data-v-6bdc8b8e] {\n  background-color: #fff;\n  /* shadows and rounded borders */\n  border-radius: 2px;\n  /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n  /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);\n}\n.main-center[data-v-6bdc8b8e] {\n  margin-top: 30px;\n  margin: 0 auto;\n  max-width: 330px;\n  padding: 40px 40px;\n}\n.login-button[data-v-6bdc8b8e] {\n  margin-top: 5px;\n}\n.login-register[data-v-6bdc8b8e] {\n  font-size: 11px;\n  text-align: center;\n}\nul[data-v-6bdc8b8e]{\n    display: flex;\n    justify-content: center;\n}\nli[data-v-6bdc8b8e]{\n    border: 1px solid #2554ff;\n    padding: 10px 15px;\n    list-style: none;\n    margin: 0 20px;\n    text-align: center;\n    width: 100%;\n}\n.btn_signin[data-v-6bdc8b8e]{\n    background: linear-gradient(45deg,#00a8ff,#487eb0);\n    color: white;\n}\n.a_signup[data-v-6bdc8b8e]{\n    background: linear-gradient(-45deg,#7bed9f,#227093);\n    color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19892,7 +20190,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/*\n/* Created by Filipe Pina\n * Specific styles of signin, register, component\n */\n/*\n * General styles\n */\nbody[data-v-97358ae4],\nhtml[data-v-97358ae4] {\n    height: 100%;\n    background-repeat: no-repeat;\n    background-color: #d3d3d3;\n    font-family: \"Oxygen\", sans-serif;\n}\n.main[data-v-97358ae4]{\n \tmargin-top: 30px;\n}\nh1.title[data-v-97358ae4] {\n\tfont-size: 50px;\n\tfont-family: 'Passion One', cursive;\n\tfont-weight: 400;\n    color: #fff;\n}\nhr[data-v-97358ae4]{\n\twidth: 20%;\n    height: 4px;\n    color: #fff;\n    background: #fff;\n    border-radius: 6px;\n    margin-bottom: 30px;\n}\n.form-group[data-v-97358ae4]{\n\tmargin-bottom: 10px;\n}\n.main-center[data-v-97358ae4][data-v-97358ae4]{\n    max-width: 500px;\n    margin-bottom: 30px;\n    border-radius: 15px;\n    padding: 25px 40px;\n}\nlabel[data-v-97358ae4]{\n\tmargin-bottom: 10px;\n    font-weight: 500;\n}\ninput.form-control[data-v-97358ae4]{\n    border: 1px solid #ced4da;\n    border-radius: 7px !important;\n    font-size: 15px;\n}\ninput[data-v-97358ae4],\ninput[data-v-97358ae4]::-webkit-input-placeholder {\n    font-size: 15px;\n    padding-top: 3px;\n}\n.form-control[data-v-97358ae4]:focus {\n  border-color: #2554FF;\n  box-shadow: none;\n}\n.main-login[data-v-97358ae4]{\n \tbackground-color: #fff;\n    /* shadows and rounded borders */\n    border-radius: 2px;\n    /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n    /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n    /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);\n}\n.main-center[data-v-97358ae4] {\n    margin-top: 30px;\n    margin: 0 auto;\n    max-width: 330px;\n    padding: 40px 40px;\n}\n.login-button[data-v-97358ae4] {\n    margin-top: 5px;\n}\n.login-register[data-v-97358ae4] {\n    font-size: 11px;\n    text-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/*\r\n/* Created by Filipe Pina\r\n * Specific styles of signin, register, component\r\n */\r\n/*\r\n * General styles\r\n */\nbody[data-v-97358ae4],\r\nhtml[data-v-97358ae4] {\r\n  height: 100%;\r\n  background-repeat: no-repeat;\r\n  background-color: #d3d3d3;\r\n  font-family: \"Oxygen\", sans-serif;\n}\n.main[data-v-97358ae4] {\r\n  margin-top: 30px;\n}\nh1.title[data-v-97358ae4] {\r\n  font-size: 50px;\r\n  font-family: \"Passion One\", cursive;\r\n  font-weight: 400;\r\n  color: #fff;\n}\nhr[data-v-97358ae4] {\r\n  width: 20%;\r\n  height: 4px;\r\n  color: #fff;\r\n  background: #fff;\r\n  border-radius: 6px;\r\n  margin-bottom: 30px;\n}\n.form-group[data-v-97358ae4] {\r\n  margin-bottom: 10px;\n}\n.main-center[data-v-97358ae4][data-v-97358ae4] {\r\n  max-width: 500px;\r\n  margin-bottom: 30px;\r\n  border-radius: 15px;\r\n  padding: 25px 40px;\n}\nlabel[data-v-97358ae4] {\r\n  margin-bottom: 10px;\r\n  font-weight: 500;\n}\nlabel.lable-success[data-v-97358ae4] {\r\n  text-align: center;\r\n  display: inherit;\r\n  background: antiquewhite;\r\n  padding: 15px 0;\r\n  border-radius: 15px;\r\n  color: brown;\r\n  font-weight: 600;\r\n  letter-spacing: 0.5px;\n}\ninput.form-control[data-v-97358ae4] {\r\n  border: 1px solid #ced4da;\r\n  border-radius: 7px !important;\r\n  font-size: 15px;\n}\ninput[data-v-97358ae4],\r\ninput[data-v-97358ae4]::-webkit-input-placeholder {\r\n  font-size: 15px;\r\n  padding-top: 3px;\n}\n.form-control[data-v-97358ae4]:focus {\r\n  border-color: #2554ff;\r\n  box-shadow: none;\n}\n.main-login[data-v-97358ae4] {\r\n  background-color: #fff;\r\n  /* shadows and rounded borders */\r\n  border-radius: 2px;\r\n  /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\r\n  /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\r\n  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\r\n  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);\n}\n.main-center[data-v-97358ae4] {\r\n  margin-top: 30px;\r\n  margin: 0 auto;\r\n  max-width: 330px;\r\n  padding: 40px 40px;\n}\n.login-button[data-v-97358ae4] {\r\n  margin-top: 5px;\n}\n.login-register[data-v-97358ae4] {\r\n  font-size: 11px;\r\n  text-align: center;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

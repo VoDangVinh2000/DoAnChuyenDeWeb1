@@ -1,189 +1,226 @@
 <template>
-    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-2 mx-auto">
-        <div class="card card0 border-0">
-            <div class="row d-flex justify-content-center">
-                <!-- <div class="col-lg-6">
-                    <div class="card1 pb-5">
-                        <div class="row"> <img src="https://i.imgur.com/CXQmsmF.png" class="logo"> </div>
-                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="https://i.imgur.com/uNGdWHi.png" class="image"> </div>
-                    </div>
-                </div> -->
-                <div class="col-lg-6">
-                    <div class="card2 card border-0 px-4 py-5">
-                        <div class="row">
-                            <div class="col-md col-sm text-center">
-                                    <label class="mb-1 "><h2 class="mb-0">Login</h2></label>
-                            </div>
+  <div class="vue-tempalte">
+    <div class="container">
+           <h1 class="title">Log In</h1>
 
-                        </div>
-                        <div class="row px-3"> <label class="mb-1">
-                                <h6 class="mb-0 text-sm">Email Address</h6>
-                            </label> <input class="mb-4" type="text" v-model="email" name="email" placeholder="Enter a valid email address"> </div>
-                        <div class="row px-3"> <label class="mb-1">
-                                <h6 class="mb-0 text-sm">Password</h6>
-                            </label> <input type="password" v-model="password" name="password" placeholder="Enter password"> </div>
-                        <div class="row px-3 mb-4">
-                            <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
-                        </div>
-                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
-                        <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a :href="'/register'" class="text-danger ">Register</a></small> </div>
-                    </div>
-                </div>
-            </div>
+      <div class="main-center">
+          <p  style="color:red;" v-for="mess in mess_validation">{{mess}}</p>
+          <p style="color:red;" id="mess_validation"></p>
+        <form>
+          <div class="form-group">
+            <label>Email address</label>
+            <input v-model="email" type="text" class="form-control form-control-lg" />
+          </div>
 
-        </div>
+          <div class="form-group">
+            <label >Password</label>
+            <input v-model="password" type="password" class="form-control form-control-lg" />
+          </div>
+
+          <button type="submit" @click.prevent="login" class="btn btn-outline-info btn-lg btn-block btn_signin">
+            Sign In
+          </button>
+
+          <p class="forgot-password text-right mt-2 mb-4">
+            <a class="btn btn-outline-info btn-block btn-lg a_signup" href="/register">Sign up</a>
+          </p>
+        </form>
+      </div>
     </div>
+  </div>
 </template>
+
 <script>
 export default {
-    name : 'Login.vue',
-    data(){
-        return{
-
+  data() {
+    return {
+        email : '',
+        password : '',
+        mess_validation : []
+    };
+  },
+    mounted () {
+        let token = localStorage.getItem('user');
+        //get token if null => back home page
+        if(token != null){
+            window.location.href = '/home';
         }
     },
     methods : {
+        validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        },
+        login(){
+            var c_mess_validation = document.querySelector('#mess_validation');
+            this.mess_validation = [];
+            c_mess_validation.innerHTML = "";
+            //check empty input
+            if(this.email == "" || this.password == ""){
+                this.mess_validation.push("Vui lòng nhập thông tin đăng nhập!");
+                return;
+            }
+            //validation email
+            if(this.validateEmail(this.email) != true){
+                this.mess_validation.push("Vui lòng nhập khớp định dạng email!");
+                return;
+            }
+            try{
+                axios.post('/login',{
+                    email : this.email,
+                    password : this.password
+                })
+                .then(function(response){
 
-    }
-}
+                    if(response.data != null){
+                        let item = localStorage.getItem('user');
+                        if(Date.now() > item.time){
+                                localStorage.removeItem('user');
+                        }
+                        //create localstorage
+                        let obj = {
+                            time:new Date().getTime() + (60 *1000),
+                            value:response.data,
+                        }
+                        let objStr = JSON.stringify(obj);
+                        localStorage.setItem('user',objStr);
+                        window.location.href = '/';
+                    }
+                    else{
+                        c_mess_validation.innerHTML= "Thông tin tài khoản hoặc mật khẩu không đúng";
+                        return;
+                    }
+                })
+            }
+            catch(error){
+                this.msg = error.response.data.msg;
+            }
+        }
+  }
+};
 </script>
-
 <style scoped>
-body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-color: #B0BEC5;
-    background-repeat: no-repeat
+
+html {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-color: #d3d3d3;
+  font-family: "Oxygen", sans-serif;
 }
 
-.card0 {
-    box-shadow: 0px 4px 8px 0px #757575;
-    border-radius: 0px;
+.main {
+  margin-top: 30px;
 }
 
-.card2 {
-    margin: 0px 40px;
+h1.title {
+  font-size: 50px;
+  font-family: "Passion One", cursive;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  margin: 40px 0;
 }
 
-.border-line {
-    border-right: 1px solid #EEEEEE
+hr {
+  width: 20%;
+  height: 4px;
+  color: #fff;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 30px;
 }
 
-
-
-.linkedin {
-    background-color: #2867B2;
-    color: #fff;
-    font-size: 18px;
-    padding-top: 5px;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    cursor: pointer
+.form-group {
+  margin-bottom: 10px;
 }
 
-.line {
-    height: 1px;
-    width: 45%;
-    background-color: #E0E0E0;
-    margin-top: 10px
+.main-center[data-v-6bdc8b8e] {
+  max-width: 500px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  padding: 25px 40px;
+  background: #fff;
 }
 
-.or {
-    width: 10%;
-    font-weight: bold
+label {
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
-.text-sm {
-    font-size: 14px !important
+label.lable-success {
+  text-align: center;
+  display: inherit;
+  background: antiquewhite;
+  padding: 15px 0;
+  border-radius: 15px;
+  color: brown;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-::placeholder {
-    color: #BDBDBD;
-    opacity: 1;
-    font-weight: 300
-}
-
-:-ms-input-placeholder {
-    color: #BDBDBD;
-    font-weight: 300
-}
-
-::-ms-input-placeholder {
-    color: #BDBDBD;
-    font-weight: 300
+input.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 7px !important;
+  font-size: 15px;
 }
 
 input,
-textarea {
-    padding: 10px 12px 10px 12px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    margin-top: 2px;
+input::-webkit-input-placeholder {
+  font-size: 15px;
+  padding-top: 3px;
+}
+
+.form-control:focus {
+  border-color: #2554ff;
+  box-shadow: none;
+}
+
+.main-login {
+  background-color: #fff;
+  /* shadows and rounded borders */
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+  /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
+
+.main-center {
+  margin-top: 30px;
+  margin: 0 auto;
+  max-width: 330px;
+  padding: 40px 40px;
+}
+
+.login-button {
+  margin-top: 5px;
+}
+
+.login-register {
+  font-size: 11px;
+  text-align: center;
+}
+ul{
+    display: flex;
+    justify-content: center;
+}
+
+li{
+    border: 1px solid #2554ff;
+    padding: 10px 15px;
+    list-style: none;
+    margin: 0 20px;
+    text-align: center;
     width: 100%;
-    box-sizing: border-box;
-    color: #2C3E50;
-    font-size: 14px;
-    letter-spacing: 1px
 }
-
-input:focus,
-textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #304FFE;
-    outline-width: 0
+.btn_signin{
+    background: linear-gradient(45deg,#00a8ff,#487eb0);
+    color: white;
 }
-
-button:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0
-}
-
-a {
-    color: inherit;
-    cursor: pointer
-}
-
-.btn-blue {
-    background-color: #1A237E;
-    width: 150px;
-    color: #fff;
-    border-radius: 2px
-}
-
-.btn-blue:hover {
-    background-color: #000;
-    cursor: pointer
-}
-
-.bg-blue {
-    color: #fff;
-    background-color: #1A237E
-}
-
-@media screen and (max-width: 991px) {
-    .logo {
-        margin-left: 0px
-    }
-
-    .image {
-        width: 300px;
-        height: 220px
-    }
-
-    .border-line {
-        border-right: none
-    }
-
-    .card2 {
-        border-top: 1px solid #EEEEEE !important;
-        margin: 0px 15px
-    }
+.a_signup{
+    background: linear-gradient(-45deg,#7bed9f,#227093);
+    color: white;
 }
 </style>
