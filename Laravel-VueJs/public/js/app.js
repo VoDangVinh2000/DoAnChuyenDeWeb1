@@ -19499,7 +19499,8 @@ __webpack_require__.r(__webpack_exports__);
         password: this.users.password,
         confirmpassword: this.users.confirmpassword
       }).then(function (response) {
-        _this.check = true, console.log(response.data), _this.errors.length = [null];
+        _this.check = true, //console.log(response.data),
+        _this.errors.length = [null];
       })["catch"](function (error) {
         if (_this.users.name == "") {
           _this.errors = error.response.data.errors.name;
@@ -19509,12 +19510,13 @@ __webpack_require__.r(__webpack_exports__);
           _this.errors = error.response.data.errors.username;
         } else if (_this.users.password == "") {
           _this.errors = error.response.data.errors.password;
-        } else {
+        } else if (_this.users.confirmpassword == "") {
           _this.errors = error.response.data.errors.confirmpassword;
-        } // this.errors = error.response.data.errors;
+        } else if (_this.users.email != "") {
+          _this.errors = ['Email already exists or is formatted incorrectly Email'];
+        } //    console.log(error.response.data.errors);
+        //    console.log(this.errors);
 
-
-        console.log(error.response.data.errors);
       });
     }
   }
@@ -19846,17 +19848,18 @@ var _hoisted_32 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_33 = {
   "class": "form-group"
 };
-var _hoisted_34 = {
-  "class": "form-group"
-};
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Already registered ");
-
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login?");
+var _hoisted_34 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "form-group"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Already registered "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "/login"
+  }, "Login?")])], -1
+  /* HOISTED */
+  );
+});
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
-
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_5, [$data.check ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_6, "Sign Up Success")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.errors.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.errors, function (err, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
       key: index
@@ -19926,16 +19929,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.register && $options.register.apply($options, arguments);
     }, ["prevent"])),
     "class": "btn btn-dark btn-lg btn-block login-button"
-  }, " Register ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "login"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_36];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])])])])]);
+  }, " Register ")]), _hoisted_34])])])]);
 }
 
 /***/ }),
