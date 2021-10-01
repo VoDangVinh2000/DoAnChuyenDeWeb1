@@ -47,8 +47,8 @@ class UserController extends Controller
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
             'username'    => $request->input('username'),
-            'password'    => $request->input('password'),
-            'confirmpassword'    => $request->input('confirmpassword'),
+            'password'    => md5($request->input('password')),
+            'confirmpassword'    => md5($request->input('confirmpassword')),
         ]);
         return response([
             'users' => $user

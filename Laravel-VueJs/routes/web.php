@@ -19,13 +19,15 @@ use Illuminate\Http\Request;
 Route::get('/register',function(){
     return view('app.register');
 });
+Route::get('/',function(){
+    return view('app.login');
+});
 Route::get('/login',function(){
     return view('app.login');
 });
 
-// Route::post('register_test',function (Request $request){
-//     return $request;
-// });
-
 Route::post('register_test', [UserController::class,'store'])->name('register.store');
+// Route::post('register_test', function () {
+//     return request();
+// });
 
