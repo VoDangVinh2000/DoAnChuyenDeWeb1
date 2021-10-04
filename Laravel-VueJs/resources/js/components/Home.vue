@@ -1,10 +1,22 @@
 <template>
-    <p>This is home page to show list user.</p>
+    <div class="container">
+        <Header/>
+        <main>
+            <p>List user</p>
+        </main>
+        <Footer/>
+    </div>
 </template>
 
 <script>
+import Header from './Header';
+import Footer from './Footer';
 export default {
-    name : 'Home.vue'
+    name : 'Home.vue',
+    components : {
+        Header,
+        Footer
+    }
 }
 </script>
 

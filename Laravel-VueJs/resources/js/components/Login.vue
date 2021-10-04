@@ -96,7 +96,7 @@ export default {
                 })
             }
             catch(error){
-                console.log(error.response.data.msg);
+                this.msg = error.response.data.msg;
             }
         }
   }

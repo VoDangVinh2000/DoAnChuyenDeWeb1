@@ -203,13 +203,6 @@ export default {
  * General styles
  */
 
-body,
-html {
-  height: 100%;
-  background-repeat: no-repeat;
-  background-color: #d3d3d3;
-  font-family: "Oxygen", sans-serif;
-}
 
 .main {
   margin-top: 30px;
