@@ -25,10 +25,6 @@ Route::get('/login',function(){
     return view('app.login');
 });
 
-// Route::post('register_test',function (Request $request){
-//     return $request;
-// });
-
 Route::post('register_test', [UserController::class,'store'])->name('register.store');
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);

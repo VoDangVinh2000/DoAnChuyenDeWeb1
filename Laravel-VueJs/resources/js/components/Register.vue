@@ -9,14 +9,14 @@
       </div>
       <div class="main-login main-center">
         <form class="form-horizontal" method="post">
-          <!-- <div class="error" v-if="errors.length">
-                <span v-for="(err, index) of errors" :key="index">
-                    {{ err}}
-                </span>
-            </div> -->
           <label class="label label-success" v-if="check"
-            >Sign Up Success</label
-          >
+            >Sign Up Success</label>
+            <div class="error" v-if="errors.length" >
+                <span v-for="(err, index) of errors" :key="index">
+                    {{err}}
+
+                </span>
+            </div>
           <div class="form-group">
             <label for="name" class="cols-sm-2 control-label">Your Name</label>
             <div class="cols-sm-10">
@@ -130,7 +130,8 @@
             </button>
           </div>
           <div class="form-group">
-            <p>Already registered <a href="/login">Login?</a></p>
+            <p>Already registered <a href="/login">Login ?</a></p>
+
           </div>
         </form>
       </div>
@@ -150,8 +151,8 @@ export default {
         password: "",
         confirmpassword: "",
       },
-      //   errors: [],
       check: false,
+      errors: []
     };
   },
   methods: {
@@ -164,10 +165,29 @@ export default {
           password: this.users.password,
           confirmpassword: this.users.confirmpassword,
         })
-        .then((response) => (this.check = true))
-        .catch((error) => {
-          this.errors = error.response.data.error.name;
-        });
+        .then((response) => {
+            (this.check = true),
+            console.log(response.data),
+            this.errors.length = [null];
+        })
+        .catch(error => {
+            if(this.users.name == ""){
+                this.errors = error.response.data.errors.name;
+            }else if(this.users.email == ""){
+                this.errors = error.response.data.errors.email;
+            }else if(this.users.username ==""){
+                this.errors = error.response.data.errors.username;
+            }
+            else if(this.users.password ==""){
+                this.errors = error.response.data.errors.password;
+            }
+            else{
+                this.errors = error.response.data.errors.confirmpassword;
+            }
+            // this.errors = error.response.data.errors;
+            console.log(error.response.data.errors);
+
+        })
     },
   },
 };
@@ -226,7 +246,7 @@ label {
   font-weight: 500;
 }
 
-label.lable-success {
+.label-success[data-v-97358ae4]  {
   text-align: center;
   display: inherit;
   background: antiquewhite;
@@ -280,5 +300,21 @@ input::-webkit-input-placeholder {
 .login-register {
   font-size: 11px;
   text-align: center;
+}
+
+i{
+    margin-right: 10px;
+}
+
+.error{
+    text-align: center;
+  display: inherit;
+  background: brown;
+  padding: 15px 0;
+  border-radius: 15px;
+  color: antiquewhite;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
 }
 </style>

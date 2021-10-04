@@ -50,7 +50,7 @@ class UserController extends Controller
             'email'    => $request->input('email'),
             'username'    => $request->input('username'),
             'password'    => md5($request->input('password')),
-            'confirmpassword'    => $request->input('confirmpassword'),
+            'confirmpassword'    => md5($request->input('confirmpassword')),
         ]);
         return response([
             'users' => $user
@@ -111,6 +111,6 @@ class UserController extends Controller
         $data = $req->all();
         $query = User::whereRaw('BINARY email = ? AND BINARY password = ?',[$req->email
         ,md5($req->password)])->get();
-       return $query[0];
+       return $query;
     }
 }

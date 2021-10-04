@@ -71,20 +71,23 @@ export default {
                     password : this.password
                 })
                 .then(function(response){
-
-                    if(response.data != null){
-                        let item = localStorage.getItem('user');
-                        if(Date.now() > item.time){
+                    var data = localStorage.getItem('user');//get key of localStorage
+                    if(response.data.length > 0){
+                        if(!data){//if empty data
+                            //create localstorage
+                            let obj = {
+                                time:new Date().getTime() + (60 *1000),
+                                value:response.data,
+                            }
+                            let objStr = JSON.stringify(obj);
+                            localStorage.setItem('user',objStr);
+                            window.location.href = '/';
+                        }
+                        else{
+                            if(Date.now() > item.time){//check time now and expire time of localStorage
                                 localStorage.removeItem('user');
+                            }
                         }
-                        //create localstorage
-                        let obj = {
-                            time:new Date().getTime() + (60 *1000),
-                            value:response.data,
-                        }
-                        let objStr = JSON.stringify(obj);
-                        localStorage.setItem('user',objStr);
-                        window.location.href = '/';
                     }
                     else{
                         c_mess_validation.innerHTML= "Thông tin tài khoản hoặc mật khẩu không đúng";
