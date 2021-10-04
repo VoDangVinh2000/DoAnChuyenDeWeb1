@@ -14,7 +14,6 @@
             <div class="error" v-if="errors.length" >
                 <span v-for="(err, index) of errors" :key="index">
                     {{err}}
-
                 </span>
             </div>
           <div class="form-group">
@@ -130,7 +129,11 @@
             </button>
           </div>
           <div class="form-group">
+<<<<<<< HEAD
             <p>Already registered <a href="/login">Login ?</a></p>
+=======
+            <p>Already registered <a href="/login">Login?</a></p>
+>>>>>>> 56976331a83e265739b82a58ab5d1157ee14f130
 
           </div>
         </form>
@@ -167,26 +170,28 @@ export default {
         })
         .then((response) => {
             (this.check = true),
-            console.log(response.data),
+            //console.log(response.data),
             this.errors.length = [null];
         })
         .catch(error => {
             if(this.users.name == ""){
-                this.errors = error.response.data.errors.name;
+            this.errors = error.response.data.errors.name;
             }else if(this.users.email == ""){
                 this.errors = error.response.data.errors.email;
-            }else if(this.users.username ==""){
+            }else if(this.users.username == ""){
                 this.errors = error.response.data.errors.username;
             }
-            else if(this.users.password ==""){
+            else if(this.users.password == ""){
                 this.errors = error.response.data.errors.password;
             }
-            else{
+            else if(this.users.confirmpassword == ""){
                 this.errors = error.response.data.errors.confirmpassword;
             }
-            // this.errors = error.response.data.errors;
-            console.log(error.response.data.errors);
-
+            else if(this.users.email != ""){
+                this.errors = ['Email already exists or is formatted incorrectly Email']
+            }
+        //    console.log(error.response.data.errors);
+        //    console.log(this.errors);
         })
     },
   },
