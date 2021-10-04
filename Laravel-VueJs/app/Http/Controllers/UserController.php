@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
@@ -15,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //Trường : Show ra giao diện thôi. Vĩnh với Khang load dữ liệu lên
+        return view('app.home');
+        // return ;
     }
 
     /**
@@ -53,7 +55,6 @@ class UserController extends Controller
         return response([
             'users' => $user
         ], 200);
-
     }
 
     /**
@@ -99,5 +100,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+    * @param string $email
+    * @param string $password
+    */
+    public function login(Request $req){
+        $query = User::whereRaw('BINARY email = ? AND BINARY password = ?',[$req->email
+        ,md5($req->password)])->get();
+       return $query;
     }
 }

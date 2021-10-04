@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <Login />
-    </div>
+    <main>
+         <Login />
+    </main>
+
 </template>
 <script>
 import Login from "../components/Login.vue";

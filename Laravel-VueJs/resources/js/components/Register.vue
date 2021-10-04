@@ -166,7 +166,7 @@ export default {
         })
         .then((response) => {
             (this.check = true),
-            //console.log(response.data),
+            console.log(response.data),
             this.errors.length = [null];
         })
         .catch(error => {

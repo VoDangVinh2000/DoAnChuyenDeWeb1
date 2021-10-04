@@ -14,20 +14,17 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::get('/register',function(){
-    return view('app.register');
-});
-Route::get('/',function(){
-    return view('app.login');
+    return view('layouts.auth.register');
 });
 Route::get('/login',function(){
-    return view('app.login');
+    return view('layouts.auth.login');
 });
 
 Route::post('register_test', [UserController::class,'store'])->name('register.store');
-// Route::post('register_test', function () {
-//     return request();
-// });
-
+Route::post('/login',[UserController::class,'login']);
+Route::get('/home',[UserController::class,'index']);

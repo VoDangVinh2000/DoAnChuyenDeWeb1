@@ -73,3 +73,4 @@ npm install vue-router@next --save-dev
 command-line enter : composer dump-autoload 
                      + npm run development
                      + npm run watch
+                     + php artisan serve
