@@ -69,6 +69,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 npm install @types/webpack-env @vue/compiler-sfc vue-loader@next laravel-mix-vue3  --save-dev
 npm install vue@next --save-dev
 npm install laravel-mix@latest –-save-dev
+npm install vue-router@next --save-dev
 command-line enter : composer dump-autoload 
                      + npm run development
                      + npm run watch
+                     + php artisan serve

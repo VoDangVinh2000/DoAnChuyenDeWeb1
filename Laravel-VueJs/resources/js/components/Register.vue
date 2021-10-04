@@ -134,6 +134,7 @@
           </div>
         </form>
       </div>
+      <div class="fix-space"></div>
     </div>
   </div>
 </template>
@@ -166,7 +167,7 @@ export default {
         })
         .then((response) => {
             (this.check = true),
-            //console.log(response.data),
+            console.log(response.data),
             this.errors.length = [null];
         })
         .catch(error => {
@@ -204,17 +205,11 @@ export default {
  * General styles
  */
 
-body,
-html {
-  height: 100%;
-  background-repeat: no-repeat;
-  background-color: #d3d3d3;
-  font-family: "Oxygen", sans-serif;
-}
+ .main{
+     position: relative;
+ }
 
-.main {
-  margin-top: 30px;
-}
+
 
 h1.title {
   font-size: 50px;
@@ -238,7 +233,7 @@ hr {
 
 .main-center[data-v-97358ae4] {
   max-width: 500px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   border-radius: 15px;
   padding: 25px 40px;
 }
@@ -323,5 +318,13 @@ i{
 .link-login a{
     text-decoration: none;
     margin-left: 10px;
+}
+
+.panel-heading{
+    padding-top: 20px;
+}
+
+.fix-space{
+    padding-bottom: 40px;
 }
 </style>

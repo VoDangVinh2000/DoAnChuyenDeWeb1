@@ -63,7 +63,6 @@
         >
             <ul
                 class="nav nav-pills"
-                style="right: 0%; top: 108%; position: absolute"
             >
                 <li class="nav-item">
                     <img

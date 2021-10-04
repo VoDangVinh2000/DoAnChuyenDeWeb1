@@ -5,7 +5,11 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
+<<<<<<< HEAD
         'reference' => '56976331a83e265739b82a58ab5d1157ee14f130',
+=======
+        'reference' => '3935e1034aad0850b145bd08d1cb1124abe71790',
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -40,6 +44,7 @@
                 0 => '*',
             ),
         ),
+<<<<<<< HEAD
         'dflydev/dot-access-data' => array(
             'pretty_version' => 'v3.0.1',
             'version' => '3.0.1.0',
@@ -49,6 +54,8 @@
             'reference' => '0992cc19268b259a39e86f296da5f0677841f42c',
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
         'doctrine/inflector' => array(
             'pretty_version' => '2.0.3',
             'version' => '2.0.3.0',
@@ -104,12 +111,21 @@
             'dev_requirement' => true,
         ),
         'facade/ignition' => array(
+<<<<<<< HEAD
             'pretty_version' => '2.14.0',
             'version' => '2.14.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../facade/ignition',
             'aliases' => array(),
             'reference' => 'c6126e291bd44ad3fe482537a145fc70e3320598',
+=======
+            'pretty_version' => '2.13.1',
+            'version' => '2.13.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../facade/ignition',
+            'aliases' => array(),
+            'reference' => 'e3f49bef7b4165fa4b8a9dc579e7b63fa06aef78',
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
             'dev_requirement' => true,
         ),
         'facade/ignition-contracts' => array(
@@ -400,6 +416,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+<<<<<<< HEAD
             'reference' => '56976331a83e265739b82a58ab5d1157ee14f130',
             'dev_requirement' => false,
         ),
@@ -410,6 +427,18 @@
             'install_path' => __DIR__ . '/../laravel/sail',
             'aliases' => array(),
             'reference' => '5c91d33949e43500dc1d49abc5d7c2ffb6c96f44',
+=======
+            'reference' => '3935e1034aad0850b145bd08d1cb1124abe71790',
+            'dev_requirement' => false,
+        ),
+        'laravel/sail' => array(
+            'pretty_version' => 'v1.10.2',
+            'version' => '1.10.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/sail',
+            'aliases' => array(),
+            'reference' => '0b9ddae87b5867e0ca3a68f3b645079054c7ace3',
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
             'dev_requirement' => true,
         ),
         'laravel/sanctum' => array(
@@ -440,6 +469,7 @@
             'dev_requirement' => false,
         ),
         'league/commonmark' => array(
+<<<<<<< HEAD
             'pretty_version' => '2.0.2',
             'version' => '2.0.2.0',
             'type' => 'library',
@@ -455,6 +485,14 @@
             'install_path' => __DIR__ . '/../league/config',
             'aliases' => array(),
             'reference' => 'a9d39eeeb6cc49d10a6e6c36f22c4c1f4a767f3e',
+=======
+            'pretty_version' => '1.6.6',
+            'version' => '1.6.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/commonmark',
+            'aliases' => array(),
+            'reference' => 'c4228d11e30d7493c6836d20872f9582d8ba6dcf',
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
             'dev_requirement' => false,
         ),
         'league/flysystem' => array(
@@ -485,12 +523,21 @@
             'dev_requirement' => true,
         ),
         'monolog/monolog' => array(
+<<<<<<< HEAD
             'pretty_version' => '2.3.5',
             'version' => '2.3.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
             'reference' => 'fd4380d6fc37626e2f799f29d91195040137eba9',
+=======
+            'pretty_version' => '2.3.4',
+            'version' => '2.3.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'reference' => '437e7a1c50044b92773b361af77620efb76fff59',
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
             'dev_requirement' => false,
         ),
         'mtdowling/cron-expression' => array(
@@ -520,6 +567,7 @@
             'reference' => 'f4655858a784988f880c1b8c7feabbf02dfdf045',
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'nette/schema' => array(
             'pretty_version' => 'v1.2.1',
             'version' => '1.2.1.0',
@@ -538,6 +586,8 @@
             'reference' => '9cd80396ca58d7969ab44fc7afcf03624dfa526e',
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
         'nikic/php-parser' => array(
             'pretty_version' => 'v4.13.0',
             'version' => '4.13.0.0',
@@ -769,8 +819,13 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
+<<<<<<< HEAD
                 0 => '1.0|2.0',
                 1 => '1.0.0 || 2.0.0 || 3.0.0',
+=======
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
+>>>>>>> c09e05e28f67945b0b67d2dab505ca27f6554059
             ),
         ),
         'psr/simple-cache' => array(
