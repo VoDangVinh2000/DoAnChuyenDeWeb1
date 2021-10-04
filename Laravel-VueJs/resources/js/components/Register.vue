@@ -89,7 +89,7 @@ export default {
                     email: this.email,
                     username: this.username,
                 })
-                .then((response) => console.log(response));
+                .then((response) => console.log(response.data));
         },
     },
 };
