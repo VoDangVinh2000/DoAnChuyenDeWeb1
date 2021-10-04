@@ -20,7 +20,7 @@
 
           <p class="forgot-password text-right mt-2 mb-4">
             <a href="/register">Sign up</a>
-            <router-link to="/forgot-password">Forgot password ?</router-link>
+            <router-link to="#">Forgot password ?</router-link>
           </p>
 
           <div class="social-icons">
@@ -165,4 +165,9 @@ li{
     text-align: center;
     width: 100%;
 }
+.forgot-password a{
+    text-decoration: none;
+    margin-left: 20px;
+}
+
 </style>

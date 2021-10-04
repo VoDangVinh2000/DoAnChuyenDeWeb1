@@ -128,8 +128,8 @@
               Register
             </button>
           </div>
-          <div class="form-group">
-            <p>Already registered <a href="/login">Login?</a></p>
+          <div class="form-group ">
+            <p class="link-login">Already registered <a href="/login">Login?</a></p>
 
           </div>
         </form>
@@ -184,7 +184,8 @@ export default {
                 this.errors = error.response.data.errors.confirmpassword;
             }
             else if(this.users.email != ""){
-                this.errors = ['Email already exists or is formatted incorrectly Email']
+                this.errors = ['Email already exists or is formatted incorrectly Email'];
+                this.check = false;
             }
         //    console.log(error.response.data.errors);
         //    console.log(this.errors);
@@ -317,5 +318,10 @@ i{
   font-weight: 600;
   letter-spacing: 0.5px;
   margin-bottom: 20px;
+}
+
+.link-login a{
+    text-decoration: none;
+    margin-left: 10px;
 }
 </style>
