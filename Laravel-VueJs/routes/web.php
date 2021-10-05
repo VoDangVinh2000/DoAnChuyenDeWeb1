@@ -24,6 +24,9 @@ Route::get('/register',function(){
 Route::get('/login',function(){
     return view('layouts.auth.login');
 });
+Route::get('/edit',function(){
+    return view('app.edituser');
+});
 
 Route::post('register_test', [UserController::class,'store'])->name('register.store');
 Route::post('/login',[UserController::class,'login']);
