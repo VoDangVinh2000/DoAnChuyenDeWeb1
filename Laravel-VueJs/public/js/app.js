@@ -20017,7 +20017,7 @@ __webpack_require__.r(__webpack_exports__);
         email: "",
         username: "",
         password: "",
-        confirmpassword: ""
+        password_confirmation: ""
       },
       check: false,
       errors: []
@@ -20027,30 +20027,69 @@ __webpack_require__.r(__webpack_exports__);
     register: function register() {
       var _this = this;
 
+      //Change border color err
+      var nameGray = document.querySelector("#name").style.border = "1px solid #ced4da";
+      var emailGray = document.querySelector("#email").style.border = "1px solid #ced4da";
+      var userGray = document.querySelector("#username").style.border = "1px solid #ced4da";
+      var passGray = document.querySelector("#password").style.border = "1px solid #ced4da";
+      var confirmGray = document.querySelector("#confirm").style.border = "1px solid #ced4da"; //Axios
+
       axios.post("/register_test", {
         name: this.users.name,
         email: this.users.email,
         username: this.users.username,
         password: this.users.password,
-        confirmpassword: this.users.confirmpassword
+        password_confirmation: this.users.password_confirmation
       }).then(function (response) {
-        _this.check = true, console.log(response.data), _this.errors.length = [null];
+        _this.check = true, //console.log(response.data),
+        _this.errors = [null];
+        _this.errors.length = 0; //change border color
+
+        nameGray;
+        emailGray;
+        userGray;
+        passGray;
+        confirmGray;
       })["catch"](function (error) {
-        if (_this.users.name == "") {
-          _this.errors = error.response.data.errors.name;
-        } else if (_this.users.email == "") {
-          _this.errors = error.response.data.errors.email;
-        } else if (_this.users.username == "") {
-          _this.errors = error.response.data.errors.username;
-        } else if (_this.users.password == "") {
-          _this.errors = error.response.data.errors.password;
-        } else if (_this.users.confirmpassword == "") {
-          _this.errors = error.response.data.errors.confirmpassword;
-        } else if (_this.users.email != "") {
-          _this.errors = ['Email already exists or is formatted incorrectly Email'];
-          _this.check = false;
-        } //    console.log(error.response.data.errors);
-        //    console.log(this.errors);
+        _this.check = false;
+
+        if (error.response.data.errors.name) {
+          _this.errors = error.response.data.errors.name[0];
+          document.querySelector("#name").style.border = "1px solid red";
+          emailGray;
+          userGray;
+          passGray;
+          confirmGray;
+        } else if (error.response.data.errors.email) {
+          _this.errors = error.response.data.errors.email[0];
+          document.querySelector("#email").style.border = "1px solid red";
+          nameGray;
+          userGray;
+          passGray;
+          confirmGray;
+        } else if (error.response.data.errors.username) {
+          _this.errors = error.response.data.errors.username[0];
+          document.querySelector("#username").style.border = "1px solid red";
+          nameGray;
+          emailGray;
+          passGray;
+          confirmGray;
+        } else if (error.response.data.errors.password) {
+          _this.errors = error.response.data.errors.password[0];
+          document.querySelector("#password").style.border = "1px solid red";
+          nameGray;
+          emailGray;
+          userGray;
+          confirmGray;
+        } else if (error.response.data.errors.password_confirmation) {
+          _this.errors = error.response.data.errors.password_confirmation[0];
+          document.querySelector("#confirm").style.border = "1px solid red";
+          nameGray;
+          emailGray;
+          userGray;
+          passGray;
+        } // console.log(error.response.data.errors);
+        // console.log(this.errors);
 
       });
     }
@@ -20925,15 +20964,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.password]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
     "class": "form-control",
-    name: "confirmpassword",
+    name: "password_confirmation",
     id: "confirm",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.users.confirmpassword = $event;
+      return $data.users.password_confirmation = $event;
     }),
     placeholder: "Confirm your Password"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.confirmpassword]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.users.password_confirmation]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.register && $options.register.apply($options, arguments);
