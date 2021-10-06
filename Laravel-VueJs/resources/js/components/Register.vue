@@ -175,7 +175,7 @@ export default {
         })
         .then((response) => {
             (this.check = true),
-            //console.log(response.data),
+            console.log(response.data),
             this.errors = [null];
             this.errors.length = 0;
             //change border color
