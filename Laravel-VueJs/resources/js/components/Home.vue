@@ -14,7 +14,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
                         <Users v-bind:users="this.users"
                         :stt="0"  :currentPage="this.users.current_page" :pageSize="this.users.per_page"
                         :total="this.users.total" :lastPage="this.users.last_page" />

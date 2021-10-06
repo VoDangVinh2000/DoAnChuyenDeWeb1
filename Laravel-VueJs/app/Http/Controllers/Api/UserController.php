@@ -48,7 +48,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = null;
+        if($id != null){
+            $user = User::find($id);
+            return response($user,200);
+        }
+        else{
+            return $user;
+        }
+
     }
 
     /**

@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'username' => $this->faker->userName(),
             'email_verified_at' => now(),
             'password' => md5('123456'), // password
-            'confirmpassword' => md5('123456'), // confirmt password
+            'password_confirmation' => md5('123456'),
             'remember_token' => Str::random(10),
         ];
     }

@@ -15,15 +15,16 @@ export default {
     },
     mounted() {
         var user = JSON.parse(localStorage.getItem('user'));
-        if (Date.now() > user.data.time) {
-            //check time now and expire time of localStorage
-            localStorage.removeItem("user");
-            //window.location.href = '/login';
-        }
         if(user == null){
             this.load = false;
             window.location.href = '/login';
         }
+        if (Date.now() > user.data.time) {
+            //check time now and expire time of localStorage
+            localStorage.removeItem("user");
+            window.location.href = '/login';
+        }
+
     },
 }
 </script>

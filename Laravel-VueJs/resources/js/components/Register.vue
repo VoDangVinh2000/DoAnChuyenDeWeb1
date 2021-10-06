@@ -175,7 +175,6 @@ export default {
         })
         .then((response) => {
             (this.check = true),
-            //console.log(response.data),
             this.errors = [null];
             this.errors.length = 0;
             //change border color
@@ -186,7 +185,7 @@ export default {
             confirmGray;
         })
         .catch(error => {
-                this.check = false;
+            this.check = false;
             if(error.response.data.errors.name){
                 this.errors = error.response.data.errors.name[0];
                 document.querySelector("#name").style.border = "1px solid red";

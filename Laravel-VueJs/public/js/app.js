@@ -19777,6 +19777,26 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Header: _Header__WEBPACK_IMPORTED_MODULE_0__["default"],
     Footer: _Footer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      user: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    var current_url = window.location.href;
+    var indexOf = current_url.lastIndexOf('/');
+    var value_indexOf = current_url.substr(indexOf + 1);
+    current_url = '/api/user-id/' + value_indexOf;
+    axios.get(current_url).then(function (response) {
+      if (response.data.id) {
+        _this.user = response.data;
+      } else {
+        window.location.href = '/home';
+      }
+    });
   }
 });
 
@@ -20041,8 +20061,7 @@ __webpack_require__.r(__webpack_exports__);
         password: this.users.password,
         password_confirmation: this.users.password_confirmation
       }).then(function (response) {
-        _this.check = true, //console.log(response.data),
-        _this.errors = [null];
+        _this.check = true, _this.errors = [null];
         _this.errors.length = 0; //change border color
 
         nameGray;
@@ -20159,6 +20178,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    edit: function edit(id) {
+      window.location.href = 'edit/' + id;
     }
   },
   props: {
@@ -20220,13 +20242,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var user = JSON.parse(localStorage.getItem('user'));
 
-    if (Date.now() > user.data.time) {
-      //check time now and expire time of localStorage
-      localStorage.removeItem("user"); //window.location.href = '/login';
-    }
-
     if (user == null) {
       this.load = false;
+      window.location.href = '/login';
+    }
+
+    if (Date.now() > user.data.time) {
+      //check time now and expire time of localStorage
+      localStorage.removeItem("user");
       window.location.href = '/login';
     }
   }
@@ -20304,59 +20327,46 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+var _hoisted_3 = {
   method: "POST"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "hidden",
   name: "id"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "name"
-}, "Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "form-control",
-  name: "name",
-  placeholder: "name"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "username"
-}, "User Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "form-control",
-  name: "username",
-  placeholder: "username"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "Email"
-}, "Email"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "form-control",
-  name: "email",
-  placeholder: "email"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "password"
-}, "Password"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "password",
-  name: "password",
-  "class": "form-control",
-  placeholder: "Password"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  name: "submit",
-  value: "submit",
-  "class": "btn btn-primary"
-}, " Submit ")])], -1
+}, null, -1
 /* HOISTED */
 );
+
+var _hoisted_5 = {
+  "class": "form-group"
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "name"
+}, "Name", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"form-group\"><label for=\"username\">User Name</label><input class=\"form-control\" name=\"username\" placeholder=\"username\"></div><div class=\"form-group\"><label for=\"Email\">Email</label><input class=\"form-control\" name=\"email\" placeholder=\"email\"></div><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" name=\"password\" class=\"form-control\" placeholder=\"Password\"></div><button type=\"submit\" name=\"submit\" value=\"submit\" class=\"btn btn-primary\"> Submit </button>", 4);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
 
   var _component_Footer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Footer");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), _hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "form-control",
+    name: "name",
+    placeholder: "name",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.user.name = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.name]])]), _hoisted_7])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -21001,20 +21011,28 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-4243cd86"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 
-var _hoisted_1 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
-    "class": "action"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: "/edit",
-    "class": "edit"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_1 = {
+  "class": "action"
+};
+var _hoisted_2 = ["onClick"];
+
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-user-edit"
-  })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_4 = [_hoisted_3];
+
+var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#",
     "class": "delete"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-trash-alt"
-  })])], -1
+  })], -1
   /* HOISTED */
   );
 });
@@ -21034,7 +21052,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.email), 1
     /* TEXT */
-    )]), _hoisted_1]);
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      href: "/edit",
+      "class": "edit",
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $options.edit(user.id);
+      }, ["prevent"])
+    }, _hoisted_4, 8
+    /* PROPS */
+    , _hoisted_2), _hoisted_5])]);
   }), 128
   /* KEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_v_pagination, {
@@ -21340,7 +21366,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/*\r\n/* Created by Filipe Pina\r\n * Specific styles of signin, register, component\r\n */\r\n/*\r\n * General styles\r\n */\n.main[data-v-97358ae4]{\r\n     position: relative;\n}\nh1.title[data-v-97358ae4] {\r\n  font-size: 50px;\r\n  font-family: \"Passion One\", cursive;\r\n  font-weight: 400;\r\n  color: #fff;\n}\nhr[data-v-97358ae4] {\r\n  width: 20%;\r\n  height: 4px;\r\n  color: #fff;\r\n  background: #fff;\r\n  border-radius: 6px;\r\n  margin-bottom: 30px;\n}\n.form-group[data-v-97358ae4] {\r\n  margin-bottom: 10px;\n}\n.main-center[data-v-97358ae4][data-v-97358ae4] {\r\n  max-width: 500px;\r\n  /* margin-bottom: 30px; */\r\n  border-radius: 15px;\r\n  padding: 25px 40px;\n}\nlabel[data-v-97358ae4] {\r\n  margin-bottom: 10px;\r\n  font-weight: 500;\n}\n.label-success[data-v-97358ae4][data-v-97358ae4]  {\r\n  text-align: center;\r\n  display: inherit;\r\n  background: antiquewhite;\r\n  padding: 15px 0;\r\n  border-radius: 15px;\r\n  color: brown;\r\n  font-weight: 600;\r\n  letter-spacing: 0.5px;\n}\ninput.form-control[data-v-97358ae4] {\r\n  border: 1px solid #ced4da;\r\n  border-radius: 7px !important;\r\n  font-size: 15px;\n}\ninput[data-v-97358ae4],\r\ninput[data-v-97358ae4]::-webkit-input-placeholder {\r\n  font-size: 15px;\r\n  padding-top: 3px;\n}\n.form-control[data-v-97358ae4]:focus {\r\n  border-color: #2554ff;\r\n  box-shadow: none;\n}\n.main-login[data-v-97358ae4] {\r\n  background-color: #fff;\r\n  /* shadows and rounded borders */\r\n  border-radius: 2px;\r\n  /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\r\n  /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\r\n  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\r\n  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);\n}\n.main-center[data-v-97358ae4] {\r\n  margin-top: 30px;\r\n  margin: 0 auto;\r\n  max-width: 330px;\r\n  padding: 40px 40px;\n}\n.login-button[data-v-97358ae4] {\r\n  margin-top: 5px;\n}\n.login-register[data-v-97358ae4] {\r\n  font-size: 11px;\r\n  text-align: center;\n}\ni[data-v-97358ae4]{\r\n    margin-right: 10px;\n}\n.error[data-v-97358ae4]{\r\n    text-align: center;\r\n  display: inherit;\r\n  background: brown;\r\n  padding: 15px 0;\r\n  border-radius: 15px;\r\n  color: antiquewhite;\r\n  font-weight: 600;\r\n  letter-spacing: 0.5px;\r\n  margin-bottom: 20px;\n}\n.link-login a[data-v-97358ae4]{\r\n    text-decoration: none;\r\n    margin-left: 10px;\n}\n.panel-heading[data-v-97358ae4]{\r\n    padding-top: 20px;\n}\n.fix-space[data-v-97358ae4]{\r\n    padding-bottom: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/*\n/* Created by Filipe Pina\n * Specific styles of signin, register, component\n */\n/*\n * General styles\n */\n.main[data-v-97358ae4]{\n     position: relative;\n}\nh1.title[data-v-97358ae4] {\n  font-size: 50px;\n  font-family: \"Passion One\", cursive;\n  font-weight: 400;\n  color: #fff;\n}\nhr[data-v-97358ae4] {\n  width: 20%;\n  height: 4px;\n  color: #fff;\n  background: #fff;\n  border-radius: 6px;\n  margin-bottom: 30px;\n}\n.form-group[data-v-97358ae4] {\n  margin-bottom: 10px;\n}\n.main-center[data-v-97358ae4][data-v-97358ae4] {\n  max-width: 500px;\n  /* margin-bottom: 30px; */\n  border-radius: 15px;\n  padding: 25px 40px;\n}\nlabel[data-v-97358ae4] {\n  margin-bottom: 10px;\n  font-weight: 500;\n}\n.label-success[data-v-97358ae4][data-v-97358ae4]  {\n  text-align: center;\n  display: inherit;\n  background: antiquewhite;\n  padding: 15px 0;\n  border-radius: 15px;\n  color: brown;\n  font-weight: 600;\n  letter-spacing: 0.5px;\n}\ninput.form-control[data-v-97358ae4] {\n  border: 1px solid #ced4da;\n  border-radius: 7px !important;\n  font-size: 15px;\n}\ninput[data-v-97358ae4],\ninput[data-v-97358ae4]::-webkit-input-placeholder {\n  font-size: 15px;\n  padding-top: 3px;\n}\n.form-control[data-v-97358ae4]:focus {\n  border-color: #2554ff;\n  box-shadow: none;\n}\n.main-login[data-v-97358ae4] {\n  background-color: #fff;\n  /* shadows and rounded borders */\n  border-radius: 2px;\n  /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n  /* -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */\n  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);\n}\n.main-center[data-v-97358ae4] {\n  margin-top: 30px;\n  margin: 0 auto;\n  max-width: 330px;\n  padding: 40px 40px;\n}\n.login-button[data-v-97358ae4] {\n  margin-top: 5px;\n}\n.login-register[data-v-97358ae4] {\n  font-size: 11px;\n  text-align: center;\n}\ni[data-v-97358ae4]{\n    margin-right: 10px;\n}\n.error[data-v-97358ae4]{\n    text-align: center;\n  display: inherit;\n  background: brown;\n  padding: 15px 0;\n  border-radius: 15px;\n  color: antiquewhite;\n  font-weight: 600;\n  letter-spacing: 0.5px;\n  margin-bottom: 20px;\n}\n.link-login a[data-v-97358ae4]{\n    text-decoration: none;\n    margin-left: 10px;\n}\n.panel-heading[data-v-97358ae4]{\n    padding-top: 20px;\n}\n.fix-space[data-v-97358ae4]{\n    padding-bottom: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21364,7 +21390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.show-info p[data-v-4243cd86]{\n        overflow: auto;\n        margin-bottom: 0;\n        padding-bottom: 10px;\n        /* cursor: pointer; */\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar{\n        width: 10px;\n        height: 8px;\n        cursor: pointer;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-track {\n        background: #2f373d;\n        border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb{\n        background: #444b50;\n        box-shadow: 0 0 7px #333;\n        padding: 5px 0;\n        border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb:hover{\n        background: #374a5c;\n}\n.action[data-v-4243cd86]{\n        position: relative;\n}\n.action a.edit[data-v-4243cd86]{\n        position: absolute;\n        top: 3px;\n        padding: 15px;\n        left: 20px;\n        color: cyan;\n}\n.action a.delete[data-v-4243cd86]{\n        position: absolute;\n        top: 3px;\n        padding: 15px 18px;\n        right: 60px;\n        color: rgb(255, 21, 21);\n}\n.action a[data-v-4243cd86]:hover{\n        background: #505050;\n        border-radius: 10px;\n}\n.action a.delete[data-v-4243cd86]:hover::before{\n        position: absolute;\n        top: -5px;\n        font-size: 10px;\n        left: 30px;\n        font-weight: 500;\n        color: #c2c2c2;\n        letter-spacing: 1px;\n        padding: 10px;\n        border-radius: 5px;\n        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);\n        content: 'Delete';\n}\n.action a.edit[data-v-4243cd86]:hover::before{\n        position: absolute;\n        letter-spacing: 1px;\n        top: -5px;\n        font-size: 10px;\n        left: 30px;\n        font-weight: 500;\n        color: #c2c2c2;\n        padding: 10px 15px;\n        border-radius: 5px;\n        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);\n        content: 'Edit';\n}\n.action a i[data-v-4243cd86]{\n        font-size: 17px;\n}\n.Pagination[data-v-2a30deb0][data-v-4243cd86]{\n        flex-wrap: inherit;\n        padding: 3px;\n        background: #fff;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.show-info p[data-v-4243cd86]{\n        overflow: auto;\n        margin-bottom: 0;\n        padding-bottom: 10px;\n        /* cursor: pointer; */\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar{\n        width: 10px;\n        height: 8px;\n        cursor: pointer;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-track {\n        background: #2f373d;\n        border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb{\n        background: #444b50;\n        box-shadow: 0 0 7px #333;\n        padding: 5px 0;\n        border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb:hover{\n        background: #374a5c;\n}\n.action[data-v-4243cd86]{\n        position: relative;\n}\n.action a.edit[data-v-4243cd86]{\n        position: absolute;\n        top: 3px;\n        padding: 15px;\n        left: 20px;\n        color: cyan;\n}\n.action a.delete[data-v-4243cd86]{\n        position: absolute;\n        top: 3px;\n        padding: 15px 18px;\n        right: 60px;\n        color: rgb(255, 21, 21);\n}\n.action a[data-v-4243cd86]:hover{\n        background: #505050;\n        border-radius: 10px;\n}\n.action a.delete[data-v-4243cd86]:hover::before{\n        position: absolute;\n        top: -5px;\n        font-size: 10px;\n        left: 55px;\n        font-weight: 500;\n        color: #c2c2c2;\n        letter-spacing: 1px;\n        padding: 10px;\n        border-radius: 5px;\n        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);\n        content: 'Delete';\n          pointer-events: none;\n}\n.action a.edit[data-v-4243cd86]:hover::before{\n        position: absolute;\n        letter-spacing: 1px;\n        top: -5px;\n        font-size: 10px;\n        left: 55px;\n        font-weight: 500;\n        color: #c2c2c2;\n        padding: 10px 15px;\n        border-radius: 5px;\n        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);\n        content: 'Edit';\n        pointer-events: none;\n}\n.action a i[data-v-4243cd86]{\n        font-size: 17px;\n}\n.Pagination[data-v-2a30deb0][data-v-4243cd86]{\n        flex-wrap: inherit;\n        padding: 3px;\n        background: #fff;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

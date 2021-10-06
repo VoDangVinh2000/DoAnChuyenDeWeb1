@@ -1,6 +1,7 @@
 <template>
+    <Header/>
     <div class="container">
-        <Header/>
+
             <h1 class="title" style="position:relative;left:42%;color:white">Cập nhật</h1>
             <main>
                 <form method="POST">
@@ -11,6 +12,7 @@
                             class="form-control"
                             name="name"
                             placeholder="name"
+                            v-model="user.name"
                         />
                     </div>
                     <div class="form-group">
@@ -38,7 +40,6 @@
                             placeholder="Password"
                         />
                     </div>
-
                     <button
                         type="submit"
                         name="submit"
@@ -49,8 +50,8 @@
                     </button>
                 </form>
             </main>
-        <Footer/>
     </div>
+     <Footer/>
 </template>
 <script>
 import Header from './Header';
@@ -61,6 +62,27 @@ export default {
         Header,
         Footer,
     },
+    data(){
+        return {
+            user : [],
+        }
+    },
+    mounted () {
+        var current_url = window.location.href;
+        var indexOf = current_url.lastIndexOf('/');
+        var value_indexOf = current_url.substr(indexOf + 1);
+        current_url = '/api/user-id/' + value_indexOf;
+        axios.get(current_url)
+        .then(response => {
+            if(response.data.id){
+                this.user = response.data;
+            }
+            else{
+                window.location.href = '/home';
+            }
+
+        })
+    }
 };
 </script>
 <style scoped>

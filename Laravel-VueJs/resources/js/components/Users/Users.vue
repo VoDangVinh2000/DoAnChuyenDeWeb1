@@ -1,5 +1,4 @@
 <template>
-
     <tr class="show-info" v-for="user in users.data" :key="user.id">
         <td>
             <p>{{user.id}}</p>
@@ -14,8 +13,8 @@
             <p>{{user.email}}</p>
         </td>
         <td class="action">
-            <a href="/edit" class="edit">
-                <i class="fas fa-user-edit"></i>
+            <a href="/edit" class="edit" @click.prevent="edit(user.id)">
+                <i class="fas fa-user-edit" ></i>
             </a>
             <a href="#" class="delete">
                 <i class="fas fa-trash-alt"></i>
@@ -50,6 +49,9 @@ export default {
             const response = await fetch(url);
             const data = await response.json();
             this.users.data = data.data;
+        },
+        edit(id){
+            window.location.href = 'edit/' + id;
         }
     },
     props : {
@@ -118,7 +120,7 @@ export default {
         position: absolute;
         top: -5px;
         font-size: 10px;
-        left: 30px;
+        left: 55px;
         font-weight: 500;
         color: #c2c2c2;
         letter-spacing: 1px;
@@ -126,20 +128,21 @@ export default {
         border-radius: 5px;
         box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
         content: 'Delete';
+          pointer-events: none;
     }
-
     .action a.edit:hover::before{
         position: absolute;
         letter-spacing: 1px;
         top: -5px;
         font-size: 10px;
-        left: 30px;
+        left: 55px;
         font-weight: 500;
         color: #c2c2c2;
         padding: 10px 15px;
         border-radius: 5px;
         box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
         content: 'Edit';
+        pointer-events: none;
     }
 
     .action a i{
