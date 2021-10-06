@@ -42,15 +42,14 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'username' => 'required',
-            'password' => 'required|min:4',
-            'confirmpassword' => 'required|min:4',
+            'password' => 'required|min:4|confirmed',
         ]);
         $user = User::create([
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
             'username'    => $request->input('username'),
             'password'    => md5($request->input('password')),
-            'confirmpassword'    => md5($request->input('confirmpassword')),
+            'password_confirmation'    => md5($request->input('password_confirmation')),
         ]);
         return response([
             'users' => $user
