@@ -1,5 +1,5 @@
 <template>
-    <Home v-if="load"/>
+    <Home v-if="load" />
 </template>
 <script>
 import Home from '../components/Home';

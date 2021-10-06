@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 class UserController extends Controller
 {
     /**
@@ -15,9 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        return view('app.home');
-        // return ;
+        $users = User::paginate(5);
+        return response($users,200);
     }
 
     /**
@@ -25,9 +24,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-
+        //
     }
 
     /**
@@ -38,23 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'username' => 'required',
-            'password' => 'required|min:4',
-            'confirmpassword' => 'required|min:4',
-        ]);
-        $user = User::create([
-            'name'     => $request->input('name'),
-            'email'    => $request->input('email'),
-            'username'    => $request->input('username'),
-            'password'    => md5($request->input('password')),
-            'confirmpassword'    => md5($request->input('confirmpassword')),
-        ]);
-        return response([
-            'users' => $user
-        ], 200);
+        //
     }
 
     /**
@@ -100,15 +83,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-    * @param string $email
-    * @param string $password
-    */
-    public function login(Request $req){
-        $query = User::whereRaw('BINARY email = ? AND BINARY password = ?',[$req->email
-        ,md5($req->password)])->get();
-       return $query;
     }
 }
