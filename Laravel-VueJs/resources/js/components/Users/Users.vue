@@ -14,7 +14,7 @@
             <p>{{user.email}}</p>
         </td>
         <td class="action">
-            <a href="#" class="edit">
+            <a href="/edit" class="edit">
                 <i class="fas fa-user-edit"></i>
             </a>
             <a href="#" class="delete">

@@ -70,7 +70,7 @@ npm install @types/webpack-env @vue/compiler-sfc vue-loader@next laravel-mix-vue
 npm install vue@next --save-dev
 npm install laravel-mix@latest –-save-dev
 npm install vue-router@next --save-dev
-npm install laravel-vue-pagination --save-dev
+npm install @hennge/vue3-pagination (new-ver1)
 command-line enter : composer dump-autoload 
                      + npm run development
                      + npm run watch
