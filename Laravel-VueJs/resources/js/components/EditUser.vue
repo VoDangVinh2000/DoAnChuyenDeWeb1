@@ -1,0 +1,60 @@
+<template lang="">
+    <div style="padding-bottom:10px">
+        <h1 class="title" style="position:relative;left:42%;color:white">Cập nhật</h1>
+        <div class="container" style="position: relative;">
+            
+            <form method="POST">
+                <input type="hidden" name="id" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                        class="form-control"
+                        name="name"
+                        placeholder="name"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="username">User Name</label>
+                    <input
+                        class="form-control"
+                        name="username"
+                        placeholder="username"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input
+                        class="form-control"
+                        name="email"
+                        placeholder="email"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Password"
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    name="submit"
+                    value="submit"
+                    class="btn btn-primary"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</template>
+<script>
+export default {};
+</script>
+<style scoped>
+
+
+</style>
