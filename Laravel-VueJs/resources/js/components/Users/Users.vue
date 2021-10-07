@@ -21,13 +21,14 @@
             </a>
         </td>
     </tr>
-    <v-pagination
+        <v-pagination
         v-model="currentPage"
         :pages="lastPage"
         :range-size="1"
         active-color="#DCEDFF"
         @update:modelValue="updateHandler"
-    />
+        />
+
 </template>
 
 <script>
@@ -150,7 +151,15 @@ export default {
     }
     .Pagination[data-v-2a30deb0]{
         flex-wrap: inherit;
-        padding: 3px;
+        padding: 8px 15px;
         background: #fff;
+        margin: 10px 0;
+        border-radius: 6px;
+        box-shadow: 0 0 10px #fff;
+        justify-content: space-between;
+        transform: translateX(27em);
+    }
+    svg[data-v-2a30deb0]{
+        fill: brown;
     }
 </style>

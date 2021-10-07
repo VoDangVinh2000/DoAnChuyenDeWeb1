@@ -87,7 +87,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        var_dump($request->all());
+        die();
     }
 
     /**

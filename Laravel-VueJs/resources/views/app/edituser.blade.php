@@ -3,4 +3,4 @@
 @section('content')
     <edit-views></edit-views>
 @endsection
-@section('title', 'edit')
+@section('title', 'View Update')
