@@ -129,11 +129,7 @@
             </button>
           </div>
           <div class="form-group">
-<<<<<<< HEAD
-            <p>Already registered <a href="/login">Login ?</a></p>
-=======
             <p>Already registered <a href="/login">Login?</a></p>
->>>>>>> 56976331a83e265739b82a58ab5d1157ee14f130
 
           </div>
         </form>
