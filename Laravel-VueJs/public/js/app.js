@@ -19812,10 +19812,11 @@ __webpack_require__.r(__webpack_exports__);
         username: this.user.username,
         password: this.user.password
       }).then(function (response) {
-        //console.log(response.data);
+        console.log(response.data);
         alert("Update thành công");
-      });
-      console.log(this.user);
+      }); //console.log(this.user);
+
+      window.location.href = "/home";
     }
   }
 });
@@ -20637,7 +20638,7 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
     scope: "col"
   }, "Email"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Actions")])], -1
+  }, "Action")])], -1
   /* HOISTED */
   );
 });

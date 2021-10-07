@@ -38,4 +38,3 @@ Route::post('register_test', [UserController::class,'store'])->name('register.st
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
 Route::post('/edit-user/{id}',[UserController::class,'update']);
-

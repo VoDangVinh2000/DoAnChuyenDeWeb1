@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     /**
@@ -75,7 +76,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -85,10 +86,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        var_dump($request->all());
-        die();
+    public function update(Request $request,$id)
+    {        
+         $name = $request->input('name');
+         $user_name = $request->input('username');
+         $email =  $request->input('email');
+         $pass =  $request->input('password');
+        
+         DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ? where id = ?', 
+         [$name,$user_name, $email,md5($pass), md5($pass),$id]);
+         var_dump("cap nhat thanh cong");
     }
 
     /**

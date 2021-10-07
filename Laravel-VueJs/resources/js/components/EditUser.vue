@@ -104,10 +104,11 @@ export default {
                 password: this.user.password,
             })
             .then((response) => {
-                //console.log(response.data);
+                console.log(response.data);
                 alert("Update thành công");
             })
-            console.log(this.user);
+            //console.log(this.user);
+              window.location.href = "/home";
         }
     }
 };
