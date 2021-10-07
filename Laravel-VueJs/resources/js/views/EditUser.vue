@@ -1,7 +1,5 @@
 <template>
-    <main>
-        <EditUser />
-    </main>
+    <EditUser />
 </template>
 <script>
 import EditUser from "../components/EditUser.vue";
@@ -13,7 +11,5 @@ export default {
 </script>
 
 <style scoped>
-main {
-    background: #2554ff;
-}
+
 </style>

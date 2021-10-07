@@ -24,10 +24,18 @@ Route::get('/register',function(){
 Route::get('/login',function(){
     return view('layouts.auth.login');
 });
-Route::get('/edit',function(){
+// Route::get('/edit',function(){
+//     return view('app.edituser');
+// });
+
+Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });
-
+Route::fallback(function(){
+    return redirect('/home');
+});
 Route::post('register_test', [UserController::class,'store'])->name('register.store');
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
+Route::post('/edit-user/{id}',[UserController::class,'update']);
+

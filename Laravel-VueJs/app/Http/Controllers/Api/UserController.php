@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 class UserController extends Controller
 {
     /**
@@ -15,9 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        return view('app.home');
-        // return ;
+        $users = User::paginate(5);
+        return response($users,200);
     }
 
     /**
@@ -25,9 +24,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-
+        //
     }
 
     /**
@@ -38,22 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'username' => 'required',
-            'password' => 'required|min:4|confirmed',
-        ]);
-        $user = User::create([
-            'name'     => $request->input('name'),
-            'email'    => $request->input('email'),
-            'username'    => $request->input('username'),
-            'password'    => md5($request->input('password')),
-            'password_confirmation'    => md5($request->input('password_confirmation')),
-        ]);
-        return response([
-            'users' => $user
-        ], 200);
+        //
     }
 
     /**
@@ -64,7 +48,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = null;
+        if($id != null){
+            $user = User::find($id);
+            return response($user,200);
+        }
+        else{
+            return $user;
+        }
+
     }
 
     /**
@@ -87,8 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        var_dump($request->all());
-        die();
+        //
     }
 
     /**
@@ -100,15 +91,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-    * @param string $email
-    * @param string $password
-    */
-    public function login(Request $req){
-        $query = User::whereRaw('BINARY email = ? AND BINARY password = ?',[$req->email
-        ,md5($req->password)])->get();
-       return $query;
     }
 }

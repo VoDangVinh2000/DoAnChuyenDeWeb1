@@ -89,29 +89,28 @@ export default {
             password: this.password,
           })
           .then(function (response) {
-            var data = localStorage.getItem("user"); //get key of localStorage
+             var data = localStorage.getItem("user"); //get key of localStorage
+
             if (response.data.length > 0) {
+                var token_user = response.config.headers['X-XSRF-TOKEN'];
               if (!data) {
                 //if empty data
-                //create localstorage
+                //create token and push to response
+                response.data = response.data.map(item => item.id != 0 ? {...item,token : token_user} : item);
                 let obj = {
-                  time: new Date().getTime() + 60 * 1000,
-                  value: response.data,
+                    'data' : {
+                        time: new Date().getTime() + (1 * 3600 * 1000),
+                        value: response.data,
+                    }
                 };
-                let objStr = JSON.stringify(obj);
-                localStorage.setItem("user", objStr);
-                window.location.href = "/";
-              } else {
-                if (Date.now() > item.time) {
-                  //check time now and expire time of localStorage
-                  localStorage.removeItem("user");
-                }
+                localStorage.setItem("user",JSON.stringify(obj));
+                window.location.href = "/home";
               }
             } else {
               c_mess_validation.innerHTML =
                 "Thông tin tài khoản hoặc mật khẩu không đúng";
               return;
-            }
+             }
           });
       } catch (error) {
         this.msg = error.response.data.msg;
