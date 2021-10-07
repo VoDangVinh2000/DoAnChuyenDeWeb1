@@ -19773,7 +19773,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Edit.vue',
+  name: "Edit.vue",
   components: {
     Header: _Header__WEBPACK_IMPORTED_MODULE_0__["default"],
     Footer: _Footer__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -19793,14 +19793,14 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var current_url = window.location.href;
-    var indexOf = current_url.lastIndexOf('/');
+    var indexOf = current_url.lastIndexOf("/");
     var value_indexOf = current_url.substr(indexOf + 1);
-    current_url = '/api/user-id/' + value_indexOf;
+    current_url = "/api/user-id/" + value_indexOf;
     axios.get(current_url).then(function (response) {
       if (response.data.id) {
         _this.user = response.data;
       } else {
-        window.location.href = '/home';
+        window.location.href = "/home";
       }
     });
   },
@@ -19812,10 +19812,9 @@ __webpack_require__.r(__webpack_exports__);
         username: this.user.username,
         password: this.user.password
       }).then(function (response) {
-        //console.log(response.data);
+        console.log(response.data);
         alert("Update thành công");
       });
-      console.log(this.user);
     }
   }
 });
@@ -21421,7 +21420,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.title[data-v-bc956840]{\n        margin: 30px 0;\n        text-align: center;\n        font-weight: 500;\n        text-transform: uppercase;\n        color: #2b5e90;\n        font-family: 'Poppins', sans-serif;\n}\nmain[data-v-bc956840][data-v-bc956840]{\n        margin: 30px 10px;\n        padding: 30px 50px;\n        box-shadow: 3px 3px 10px rgb(0 0 0);\n        border-radius: 5px;\n}\nlabel[data-v-bc956840]{\n        color: #98a0a7;\n        font-size: 18px;\n}\n.btn[data-v-bc956840]{\n        padding: 10px 80px;\n        background: #17a2b8;\n        color: #fff;\n        border: none;\n        text-transform: uppercase;\n        letter-spacing: 1px;\n        outline: none;\n        position: relative;\n        overflow: hidden;\n}\n.form-group-btn[data-v-bc956840]{\n        text-align: center;\n}\n.btn[data-v-bc956840]:focus{\n        border: red;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.title[data-v-bc956840] {\n  margin: 30px 0;\n  text-align: center;\n  font-weight: 500;\n  text-transform: uppercase;\n  color: #2b5e90;\n  font-family: \"Poppins\", sans-serif;\n}\nmain[data-v-bc956840][data-v-bc956840] {\n  margin: 30px 10px;\n  padding: 30px 50px;\n  box-shadow: 3px 3px 10px rgb(0 0 0);\n  border-radius: 5px;\n}\nlabel[data-v-bc956840] {\n  color: #98a0a7;\n  font-size: 18px;\n}\n.btn[data-v-bc956840] {\n  padding: 10px 80px;\n  background: #17a2b8;\n  color: #fff;\n  border: none;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  outline: none;\n  position: relative;\n  overflow: hidden;\n}\n.form-group-btn[data-v-bc956840] {\n  text-align: center;\n}\n.btn[data-v-bc956840]:focus {\n  border: red;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
