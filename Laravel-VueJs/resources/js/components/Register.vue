@@ -110,9 +110,9 @@
                 <input
                   type="password"
                   class="form-control"
-                  name="confirmpassword"
+                  name="password_confirmation"
                   id="confirm"
-                  v-model="users.confirmpassword"
+                  v-model="users.password_confirmation"
                   placeholder="Confirm your Password"
                 />
               </div>
@@ -128,12 +128,18 @@
               Register
             </button>
           </div>
+<<<<<<< HEAD
           <div class="form-group">
             <p>Already registered <a href="/login">Login?</a></p>
+=======
+          <div class="form-group ">
+            <p class="link-login">Already registered <a href="/login">Login?</a></p>
+>>>>>>> origin/main
 
           </div>
         </form>
       </div>
+      <div class="fix-space"></div>
     </div>
   </div>
 </template>
@@ -148,7 +154,7 @@ export default {
         email: "",
         username: "",
         password: "",
-        confirmpassword: "",
+        password_confirmation: "",
       },
       check: false,
       errors: []
@@ -156,38 +162,77 @@ export default {
   },
   methods: {
     register() {
+        //Change border color err
+        let nameGray = document.querySelector("#name").style.border = "1px solid #ced4da";
+        let emailGray = document.querySelector("#email").style.border = "1px solid #ced4da";
+        let userGray = document.querySelector("#username").style.border = "1px solid #ced4da";
+        let passGray = document.querySelector("#password").style.border = "1px solid #ced4da";
+        let confirmGray = document.querySelector("#confirm").style.border = "1px solid #ced4da";
+
+        //Axios
       axios
         .post("/register_test", {
           name: this.users.name,
           email: this.users.email,
           username: this.users.username,
           password: this.users.password,
-          confirmpassword: this.users.confirmpassword,
+          password_confirmation: this.users.password_confirmation,
         })
         .then((response) => {
             (this.check = true),
-            //console.log(response.data),
-            this.errors.length = [null];
+            this.errors = [null];
+            this.errors.length = 0;
+            //change border color
+            nameGray;
+            emailGray;
+            userGray;
+            passGray;
+            confirmGray;
         })
         .catch(error => {
-            if(this.users.name == ""){
-            this.errors = error.response.data.errors.name;
-            }else if(this.users.email == ""){
-                this.errors = error.response.data.errors.email;
-            }else if(this.users.username == ""){
-                this.errors = error.response.data.errors.username;
+            this.check = false;
+            if(error.response.data.errors.name){
+                this.errors = error.response.data.errors.name[0];
+                document.querySelector("#name").style.border = "1px solid red";
+                emailGray;
+                userGray;
+                passGray;
+                confirmGray;
             }
-            else if(this.users.password == ""){
-                this.errors = error.response.data.errors.password;
+            else if(error.response.data.errors.email){
+                this.errors = error.response.data.errors.email[0];
+                document.querySelector("#email").style.border = "1px solid red";
+                nameGray;
+                userGray;
+                passGray;
+                confirmGray;
             }
-            else if(this.users.confirmpassword == ""){
-                this.errors = error.response.data.errors.confirmpassword;
+            else if(error.response.data.errors.username){
+                this.errors = error.response.data.errors.username[0];
+                document.querySelector("#username").style.border = "1px solid red";
+                nameGray;
+                emailGray;
+                passGray;
+                confirmGray;
             }
-            else if(this.users.email != ""){
-                this.errors = ['Email already exists or is formatted incorrectly Email']
+            else if(error.response.data.errors.password){
+                this.errors = error.response.data.errors.password[0];
+                document.querySelector("#password").style.border = "1px solid red";
+                nameGray;
+                emailGray;
+                userGray;
+                confirmGray;
             }
-        //    console.log(error.response.data.errors);
-        //    console.log(this.errors);
+            else if(error.response.data.errors.password_confirmation){
+                this.errors = error.response.data.errors.password_confirmation[0];
+                document.querySelector("#confirm").style.border = "1px solid red";
+                nameGray;
+                emailGray;
+                userGray;
+                passGray;
+            }
+            // console.log(error.response.data.errors);
+            // console.log(this.errors);
         })
     },
   },
@@ -203,17 +248,11 @@ export default {
  * General styles
  */
 
-body,
-html {
-  height: 100%;
-  background-repeat: no-repeat;
-  background-color: #d3d3d3;
-  font-family: "Oxygen", sans-serif;
-}
+ .main{
+     position: relative;
+ }
 
-.main {
-  margin-top: 30px;
-}
+
 
 h1.title {
   font-size: 50px;
@@ -237,7 +276,7 @@ hr {
 
 .main-center[data-v-97358ae4] {
   max-width: 500px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   border-radius: 15px;
   padding: 25px 40px;
 }
@@ -317,5 +356,18 @@ i{
   font-weight: 600;
   letter-spacing: 0.5px;
   margin-bottom: 20px;
+}
+
+.link-login a{
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.panel-heading{
+    padding-top: 20px;
+}
+
+.fix-space{
+    padding-bottom: 40px;
 }
 </style>

@@ -1,11 +1,5 @@
 <template>
     <footer class="bg-dark text-center text-white">
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
-            integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
-            crossorigin="anonymous"
-        />
         <!-- Grid container -->
         <div class="container p-4 pb-0">
             <!-- Section: Social media -->
@@ -15,7 +9,7 @@
                     class="btn btn-outline-light btn-floating m-1"
                     href="https://www.facebook.com/ptnhuan"
                     role="button"
-                    ><i class="fab fa-facebook-f"></i
+                    ><i class="fab fa-facebook-square"></i
                 ></a>
 
                 <!-- Twitter -->
@@ -64,12 +58,11 @@
 
         <!-- Copyright -->
         <div
-            class="text-center p-3"
+            class="text-center p-3 img-info"
             style="background-color: rgba(0, 0, 0, 0.2)"
         >
             <ul
                 class="nav nav-pills"
-                style="right: 0%; top: 108%; position: absolute"
             >
                 <li class="nav-item">
                     <img
@@ -126,3 +119,7 @@
         <!-- Copyright -->
     </footer>
 </template>
+
+<style scoped>
+</style>>
+

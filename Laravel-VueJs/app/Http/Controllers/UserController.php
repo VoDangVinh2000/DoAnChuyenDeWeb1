@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     /**
@@ -15,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        dd(Auth::user());
+
+        return view('app.home');
         // return ;
     }
 
@@ -42,20 +43,18 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'username' => 'required',
-            'password' => 'required|min:4',
-            'confirmpassword' => 'required|min:4',
+            'password' => 'required|min:4|confirmed',
         ]);
         $user = User::create([
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
             'username'    => $request->input('username'),
             'password'    => md5($request->input('password')),
-            'confirmpassword'    => md5($request->input('confirmpassword')),
+            'password_confirmation'    => md5($request->input('password_confirmation')),
         ]);
         return response([
             'users' => $user
         ], 200);
-
     }
 
     /**
@@ -77,7 +76,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -87,9 +86,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request,$id)
+    {        
+         $name = $request->input('name');
+         $user_name = $request->input('username');
+         $email =  $request->input('email');
+         $pass =  $request->input('password');
+        
+         DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ? where id = ?', 
+         [$name,$user_name, $email,md5($pass), md5($pass),$id]);
+         var_dump("cap nhat thanh cong");
     }
 
     /**
@@ -108,7 +114,6 @@ class UserController extends Controller
     * @param string $password
     */
     public function login(Request $req){
-        $data = $req->all();
         $query = User::whereRaw('BINARY email = ? AND BINARY password = ?',[$req->email
         ,md5($req->password)])->get();
        return $query;

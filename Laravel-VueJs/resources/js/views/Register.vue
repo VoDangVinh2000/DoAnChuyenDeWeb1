@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main-register">
         <Register />
     </div>
 </template>
@@ -11,4 +11,9 @@ export default {
     }
 }
 </script>
+<style scoped>
+.main-register{
+  background: #2554FF;
+}
+</style>
 
