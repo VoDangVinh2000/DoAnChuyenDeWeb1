@@ -95,7 +95,6 @@ class UserController extends Controller
         
          DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ? where id = ?', 
          [$name,$user_name, $email,md5($pass), md5($pass),$id]);
-         var_dump("cap nhat thanh cong");
     }
 
     /**
