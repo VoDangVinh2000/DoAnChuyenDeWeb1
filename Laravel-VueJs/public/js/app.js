@@ -20211,6 +20211,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     EditUser: _components_EditUser_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    var user = JSON.parse(localStorage.getItem('user'));
+
+    if (user == null) {
+      this.load = false;
+      window.location.href = '/login';
+    }
+
+    if (Date.now() > user.data.time) {
+      //check time now and expire time of localStorage
+      localStorage.removeItem("user");
+      alert('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.');
+      window.location.href = '/login';
+    }
   }
 });
 
@@ -20250,6 +20265,7 @@ __webpack_require__.r(__webpack_exports__);
     if (Date.now() > user.data.time) {
       //check time now and expire time of localStorage
       localStorage.removeItem("user");
+      alert('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.');
       window.location.href = '/login';
     }
   }
