@@ -54,9 +54,9 @@ export default {
             return data;
         }
     }
-
-
 }
+
+
 </script>
 
 <style scoped>

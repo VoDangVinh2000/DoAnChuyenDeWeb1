@@ -16,7 +16,7 @@
             <a href="/edit" class="edit" @click.prevent="edit(user.id)">
                 <i class="fas fa-user-edit" ></i>
             </a>
-            <a href="#" class="delete">
+            <a href="/delete" class="delete" @click.prevent="deleteUser(user.id)">
                 <i class="fas fa-trash-alt"></i>
             </a>
         </td>
@@ -53,6 +53,15 @@ export default {
         },
         edit(id){
             window.location.href = 'edit/' + id;
+        },
+       deleteUser(id) {
+           axios
+           .post("/delete/" + id + "",{})
+           .then ((response) =>{
+               console.log(response.data);
+           });
+            const index = this.users.data.indexOf(id);
+            this.users.data.splice(index, 1);
         }
     },
     props : {

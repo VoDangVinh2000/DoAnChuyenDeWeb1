@@ -31,6 +31,10 @@ Route::get('/login',function(){
 Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });
+
+Route::get('/delete/{id}',function(){
+    return view('/home');
+});
 Route::fallback(function(){
     return redirect('/home');
 });
@@ -38,3 +42,4 @@ Route::post('register_test', [UserController::class,'store'])->name('register.st
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
 Route::post('/edit-user/{id}',[UserController::class,'update']);
+Route::post('/delete/{id}', [UserController::class,'destroy']);

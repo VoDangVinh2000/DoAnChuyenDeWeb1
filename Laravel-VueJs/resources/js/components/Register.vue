@@ -128,13 +128,8 @@
               Register
             </button>
           </div>
-<<<<<<< HEAD
-          <div class="form-group">
-            <p>Already registered <a href="/login">Login?</a></p>
-=======
           <div class="form-group ">
             <p class="link-login">Already registered <a href="/login">Login?</a></p>
->>>>>>> origin/main
 
           </div>
         </form>
