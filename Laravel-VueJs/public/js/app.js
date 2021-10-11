@@ -20207,8 +20207,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.post("/delete/" + id + "", {}).then(function (response) {
         console.log(response.data);
       });
-      var index = this.users.data.indexOf(id);
-      this.users.data.splice(index, 1);
+      this.users.data = this.users.data.filter(function (item) {
+        return item.id !== id;
+      });
     }
   },
   props: {

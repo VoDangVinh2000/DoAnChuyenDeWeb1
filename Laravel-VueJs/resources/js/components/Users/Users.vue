@@ -60,8 +60,7 @@ export default {
            .then ((response) =>{
                console.log(response.data);
            });
-            const index = this.users.data.indexOf(id);
-            this.users.data.splice(index, 1);
+            this.users.data = this.users.data.filter(item => item.id !== id);
         }
     },
     props : {
