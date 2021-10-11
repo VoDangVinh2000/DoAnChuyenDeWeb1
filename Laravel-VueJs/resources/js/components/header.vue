@@ -31,4 +31,7 @@ export default {
 };
 </script>
 <style>
+    li{
+        display: flex;
+    }
 </style>

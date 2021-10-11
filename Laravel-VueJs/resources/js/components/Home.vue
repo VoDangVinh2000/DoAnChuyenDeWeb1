@@ -1,8 +1,8 @@
 <template>
+    <Header/>
     <div class="container">
-        <Header/>
         <main>
-            <h1 class="title">Users</h1>
+            <h1 class="title">LIst View Users</h1>
             <table class="table table-striped table-dark fixed">
                 <thead class="thead-light">
                     <tr>
@@ -10,7 +10,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,8 +20,8 @@
                 </tbody>
             </table>
         </main>
-        <Footer/>
     </div>
+<Footer/>
 </template>
 
 <script>
@@ -61,16 +61,15 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+    /* @import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap'); */
     .title{
         margin: 30px 0;
         text-align: center;
         font-weight: 500;
         text-transform: uppercase;
         color: #2b5e90;
-        font-family: 'Ephesis', cursive;
+        font-family: 'Poppins', sans-serif;
     }
-
 
     table{
         box-shadow: 3px 3px 10px rgb(0 0 0);
