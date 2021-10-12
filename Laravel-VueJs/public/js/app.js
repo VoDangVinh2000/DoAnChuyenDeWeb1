@@ -19813,8 +19813,8 @@ __webpack_require__.r(__webpack_exports__);
         password: this.user.password
       }).then(function (response) {
         console.log(response.data);
-        alert("Update thành công");
       });
+      window.location.href = "/home";
     }
   }
 });
@@ -20160,7 +20160,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Users.vue',
+  name: "Users.vue",
   data: function data() {
     return {};
   },
@@ -20177,7 +20177,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                url = '/api/all-user?page=' + _this.currentPage;
+                url = "/api/all-user?page=" + _this.currentPage;
                 _context.next = 3;
                 return fetch(url);
 
@@ -20199,7 +20199,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     edit: function edit(id) {
-      window.location.href = 'edit/' + id;
+      window.location.href = "edit/" + id;
+    },
+    deleteUser: function deleteUser(id) {
+      axios.post("/delete/" + id + "", {}).then(function (response) {
+        console.log(response.data);
+      });
+      var index = this.users.data.indexOf(id);
+      this.users.data.splice(index, 1);
     }
   },
   props: {
@@ -20636,7 +20643,7 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
     scope: "col"
   }, "Email"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Actions")])], -1
+  }, "Action")])], -1
   /* HOISTED */
   );
 });
@@ -21128,18 +21135,17 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_4 = [_hoisted_3];
+var _hoisted_5 = ["onClick"];
 
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: "#",
-    "class": "delete"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-trash-alt"
-  })], -1
+  }, null, -1
   /* HOISTED */
   );
 });
 
+var _hoisted_7 = [_hoisted_6];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_v_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("v-pagination");
 
@@ -21163,7 +21169,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, ["prevent"])
     }, _hoisted_4, 8
     /* PROPS */
-    , _hoisted_2), _hoisted_5])]);
+    , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      href: "/delete",
+      "class": "delete",
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $options.deleteUser(user.id);
+      }, ["prevent"])
+    }, _hoisted_7, 8
+    /* PROPS */
+    , _hoisted_5)])]);
   }), 128
   /* KEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_v_pagination, {
@@ -21469,7 +21483,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* @import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap'); */\n.title[data-v-f2b6376c]{\n        margin: 30px 0;\n        text-align: center;\n        font-weight: 500;\n        text-transform: uppercase;\n        color: #2b5e90;\n        font-family: 'Poppins', sans-serif;\n}\ntable[data-v-f2b6376c]{\n        box-shadow: 3px 3px 10px rgb(0 0 0);\n}\n.table.fixed[data-v-f2b6376c] {\n        table-layout: fixed;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* @import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap'); */\n.title[data-v-f2b6376c]{\r\n        margin: 30px 0;\r\n        text-align: center;\r\n        font-weight: 500;\r\n        text-transform: uppercase;\r\n        color: #2b5e90;\r\n        font-family: 'Poppins', sans-serif;\n}\ntable[data-v-f2b6376c]{\r\n        box-shadow: 3px 3px 10px rgb(0 0 0);\n}\n.table.fixed[data-v-f2b6376c] {\r\n        table-layout: fixed;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21541,7 +21555,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.show-info p[data-v-4243cd86]{\n        overflow: auto;\n        margin-bottom: 0;\n        padding-bottom: 10px;\n        /* cursor: pointer; */\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar{\n        width: 10px;\n        height: 8px;\n        cursor: pointer;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-track {\n        background: #2f373d;\n        border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb{\n        background: #444b50;\n        box-shadow: 0 0 7px #333;\n        padding: 5px 0;\n        border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb:hover{\n        background: #374a5c;\n}\n.action[data-v-4243cd86]{\n        position: relative;\n}\n.action a.edit[data-v-4243cd86]{\n        position: absolute;\n        top: 3px;\n        padding: 15px;\n        left: 20px;\n        color: cyan;\n}\n.action a.delete[data-v-4243cd86]{\n        position: absolute;\n        top: 3px;\n        padding: 15px 18px;\n        right: 60px;\n        color: rgb(255, 21, 21);\n}\n.action a[data-v-4243cd86]:hover{\n        background: #505050;\n        border-radius: 10px;\n}\n.action a.delete[data-v-4243cd86]:hover::before{\n        position: absolute;\n        top: -5px;\n        font-size: 10px;\n        left: 55px;\n        font-weight: 500;\n        color: #c2c2c2;\n        letter-spacing: 1px;\n        padding: 10px;\n        border-radius: 5px;\n        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);\n        content: 'Delete';\n          pointer-events: none;\n}\n.action a.edit[data-v-4243cd86]:hover::before{\n        position: absolute;\n        letter-spacing: 1px;\n        top: -5px;\n        font-size: 10px;\n        left: 55px;\n        font-weight: 500;\n        color: #c2c2c2;\n        padding: 10px 15px;\n        border-radius: 5px;\n        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);\n        content: 'Edit';\n        pointer-events: none;\n}\n.action a i[data-v-4243cd86]{\n        font-size: 17px;\n}\n.Pagination[data-v-2a30deb0][data-v-4243cd86]{\n        flex-wrap: inherit;\n        padding: 8px 15px;\n        background: #fff;\n        margin: 10px 0;\n        border-radius: 6px;\n        box-shadow: 0 0 10px #fff;\n        justify-content: space-between;\n        transform: translateX(27em);\n}\nsvg[data-v-2a30deb0][data-v-4243cd86]{\n        fill: brown;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.show-info p[data-v-4243cd86] {\n  overflow: auto;\n  margin-bottom: 0;\n  padding-bottom: 10px;\n  /* cursor: pointer; */\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar {\n  width: 10px;\n  height: 8px;\n  cursor: pointer;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-track {\n  background: #2f373d;\n  border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb {\n  background: #444b50;\n  box-shadow: 0 0 7px #333;\n  padding: 5px 0;\n  border-radius: 10px;\n}\n.show-info p[data-v-4243cd86]::-webkit-scrollbar-thumb:hover {\n  background: #374a5c;\n}\n.action[data-v-4243cd86] {\n  position: relative;\n}\n.action a.edit[data-v-4243cd86] {\n  position: absolute;\n  top: 3px;\n  padding: 15px;\n  left: 20px;\n  color: cyan;\n}\n.action a.delete[data-v-4243cd86] {\n  position: absolute;\n  top: 3px;\n  padding: 15px 18px;\n  right: 60px;\n  color: rgb(255, 21, 21);\n}\n.action a[data-v-4243cd86]:hover {\n  background: #505050;\n  border-radius: 10px;\n}\n.action a.delete[data-v-4243cd86]:hover::before {\n  position: absolute;\n  top: -5px;\n  font-size: 10px;\n  left: 55px;\n  font-weight: 500;\n  color: #c2c2c2;\n  letter-spacing: 1px;\n  padding: 10px;\n  border-radius: 5px;\n  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);\n  content: \"Delete\";\n  pointer-events: none;\n}\n.action a.edit[data-v-4243cd86]:hover::before {\n  position: absolute;\n  letter-spacing: 1px;\n  top: -5px;\n  font-size: 10px;\n  left: 55px;\n  font-weight: 500;\n  color: #c2c2c2;\n  padding: 10px 15px;\n  border-radius: 5px;\n  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);\n  content: \"Edit\";\n  pointer-events: none;\n}\n.action a i[data-v-4243cd86] {\n  font-size: 17px;\n}\n.Pagination[data-v-2a30deb0][data-v-4243cd86] {\n  flex-wrap: inherit;\n  padding: 8px 15px;\n  background: #fff;\n  margin: 10px 0;\n  border-radius: 6px;\n  box-shadow: 0 0 10px #fff;\n  justify-content: space-between;\n  transform: translateX(27em);\n}\nsvg[data-v-2a30deb0][data-v-4243cd86] {\n  fill: brown;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

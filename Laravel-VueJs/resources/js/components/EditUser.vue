@@ -64,21 +64,21 @@ export default {
       }
     });
   },
-  methods: {
-    updateUser() {
-      axios
-        .post("/edit-user/" + this.user.id + "", {
-          name: this.user.name,
-          email: this.user.email,
-          username: this.user.username,
-          password: this.user.password,
-        })
-        .then((response) => {
-          console.log(response.data);
-          alert("Update thành công");
-        });
-    },
-  },
+    methods: {
+        updateUser(){
+            axios
+            .post("/edit-user/"+this.user.id+"", {
+                name: this.user.name,
+                email: this.user.email,
+                username: this.user.username,
+                password: this.user.password,
+            })
+            .then((response) => {
+                console.log(response.data);
+            })
+              window.location.href = "/home";
+        }
+    }
 };
 </script>
 <style scoped>
