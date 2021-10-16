@@ -21,7 +21,7 @@
             </table>
         </main>
     </div>
-<Footer/>
+    <Footer/>
 </template>
 
 <script>

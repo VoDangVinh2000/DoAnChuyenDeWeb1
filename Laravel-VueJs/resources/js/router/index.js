@@ -3,6 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Home from "../views/Home.vue";
+import EditUser from "../views/EditUser.vue";
 const routes = [
     {
         name: "regsiter",
@@ -18,6 +19,11 @@ const routes = [
         name : "home",
         path : "/home",
         component : Home
+    },
+     {
+        name : "edit",
+        path : "/edit/:id",
+        component : EditUser
     }
 ];
 
