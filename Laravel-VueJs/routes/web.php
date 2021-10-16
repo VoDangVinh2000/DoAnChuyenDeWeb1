@@ -24,9 +24,7 @@ Route::get('/register',function(){
 Route::get('/login',function(){
     return view('layouts.auth.login');
 });
-// Route::get('/edit',function(){
-//     return view('app.edituser');
-// });
+
 
 Route::get('/edit/{id}',function(){
     return view('app.edituser');
@@ -42,4 +40,4 @@ Route::post('register_test', [UserController::class,'store'])->name('register.st
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
 Route::post('/edit-user/{id}',[UserController::class,'update']);
-Route::post('/delete/{id}', [UserController::class,'destroy']);
+Route::post('/delete/{id}',[UserController::class,'destroy']);
