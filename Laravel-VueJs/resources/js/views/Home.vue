@@ -22,9 +22,9 @@ export default {
         if (Date.now() > user.data.time) {
             //check time now and expire time of localStorage
             localStorage.removeItem("user");
+            alert('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.')
             window.location.href = '/login';
         }
-
     },
 }
 </script>

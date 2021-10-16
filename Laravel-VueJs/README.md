@@ -64,6 +64,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
+## Install ui vue
+composer require laravel/ui
+php artisan ui vue
+npm install && npm run dev
+
+
 ## Enviroment App
 # Đầu tiên , gõ câu lệnh cd Laravel-VueJs. Sau đó chạy những câu lệnh ở dưới
 npm install @types/webpack-env @vue/compiler-sfc vue-loader@next laravel-mix-vue3  --save-dev
