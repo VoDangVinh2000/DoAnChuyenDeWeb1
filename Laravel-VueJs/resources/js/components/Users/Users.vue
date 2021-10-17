@@ -52,14 +52,12 @@ export default {
       window.location.href = "edit/" + id;
     },
     deleteUser(id) {
-      axios
-        .post("/delete/" + id + "", {})
-        .then((response) => {
-          console.log(response.data);
-        });
-        const index = this.users.data.indexOf(id);
-        this.users.data.splice(index, 1);
-
+      axios.post("/delete/" + id + "", {}).then((response) => {
+        console.log(response.data);
+      });
+      const index = this.users.data.indexOf(id);
+      this.users.data.splice(index, 1);
+      alert("Delete user success");
     },
   },
   props: {
