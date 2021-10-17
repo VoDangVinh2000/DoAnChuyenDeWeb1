@@ -36,7 +36,7 @@ Route::get('/delete/{id}',function(){
 Route::fallback(function(){
     return redirect('/home');
 });
-Route::post('register_test', [UserController::class,'store'])->name('register.store');
+
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
 Route::post('/edit-user/{id}',[UserController::class,'update']);
