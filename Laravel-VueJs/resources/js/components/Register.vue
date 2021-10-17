@@ -144,13 +144,6 @@ export default {
   name: "Register.vue",
   data() {
     return {
-      users: {
-        name: "",
-        email: "",
-        username: "",
-        password: "",
-        password_confirmation: "",
-      },
       check: false,
       errors: []
     };
