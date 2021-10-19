@@ -20201,13 +20201,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     edit: function edit(id) {
       window.location.href = "edit/" + id;
     },
-    deleteUser: function deleteUser(id) {
-      axios.post("/delete/" + id + "", {}).then(function (response) {
-        console.log(response.data);
-      });
-      var index = this.users.data.indexOf(id);
-      this.users.data.splice(index, 1);
-      alert("Delete user success");
+    deleteUser: function deleteUser(id, email) {
+      var data = JSON.parse(localStorage.getItem("user"));
+      var newData = data.data.value[0].email;
+
+      if (newData == email) {
+        alert("Bạn không thể xóa tài khoản này!!");
+      } else {
+        axios.post("/delete/" + id + "", {}).then(function (response) {
+          console.log(response.data);
+        });
+        var index = this.users.data.indexOf(id);
+        this.users.data.splice(index, 1);
+        alert("Xóa thành công!!");
+      }
     }
   },
   props: {
@@ -21176,8 +21183,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.username), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.email), 1
-    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+      ref: "email"
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.email), 513
+    /* TEXT, NEED_PATCH */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/edit",
       "class": "edit",
@@ -21190,7 +21199,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       href: "/delete",
       "class": "delete",
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-        return $options.deleteUser(user.id);
+        return $options.deleteUser(user.id, user.email);
       }, ["prevent"])
     }, _hoisted_7, 8
     /* PROPS */
