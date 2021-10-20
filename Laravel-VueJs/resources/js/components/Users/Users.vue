@@ -10,7 +10,7 @@
       <p>{{ user.username }}</p>
     </td>
     <td>
-      <p ref="email">{{ user.email }}</p>
+      <p>{{ user.email }}</p>
     </td>
     <td class="action">
       <a href="/edit" class="edit" @click.prevent="edit(user.id)">
