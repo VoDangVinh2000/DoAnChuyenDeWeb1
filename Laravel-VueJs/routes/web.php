@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//tạo route login
 Route::get('/', function () {
     return redirect('/login');
 });

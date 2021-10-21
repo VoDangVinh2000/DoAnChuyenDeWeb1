@@ -115,6 +115,7 @@ class UserController extends Controller
     * @param string $email
     * @param string $password
     */
+    //function login
     public function login(Request $req){
         //Thực hiện lấy request và truy vấn cho đăng nhập, trả về json
         $query = User::whereRaw('BINARY email = ? AND BINARY password = ?',[$req->email
