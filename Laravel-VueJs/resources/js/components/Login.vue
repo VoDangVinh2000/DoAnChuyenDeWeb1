@@ -47,7 +47,7 @@
 </template>
 
 <script>
-export default {
+    export default {
   data() {
     return {
       email: "",
@@ -90,7 +90,6 @@ export default {
           })
           .then(function (response) {
              var data = localStorage.getItem("user"); //get key of localStorage
-
             if (response.data.length > 0) {
                 var token_user = response.config.headers['X-XSRF-TOKEN'];
               if (!data) {

@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -87,13 +87,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
-    {        
+    {
          $name = $request->input('name');
          $user_name = $request->input('username');
          $email =  $request->input('email');
          $pass =  $request->input('password');
-        
-         DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ? where id = ?', 
+
+         DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ? where id = ?',
          [$name,$user_name, $email,md5($pass), md5($pass),$id]);
     }
 
@@ -105,7 +105,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return response()->json(" successfully deleted ");
     }
 
     /**
@@ -118,3 +120,4 @@ class UserController extends Controller
        return $query;
     }
 }
+
