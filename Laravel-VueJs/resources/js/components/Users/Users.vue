@@ -1,4 +1,5 @@
 <template>
+    <!-- component users !-->
   <tr class="show-info" v-for="user in users.data" :key="user.id">
     <td>
       <p>{{ user.id }}</p>
@@ -63,6 +64,7 @@ export default {
     },
   },
   props: {
+    //props of users
     users: Object,
     stt: Number,
     currentPage: Number,
