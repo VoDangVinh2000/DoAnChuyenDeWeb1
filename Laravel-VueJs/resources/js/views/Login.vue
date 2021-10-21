@@ -1,4 +1,5 @@
 <template>
+    <!-- Gọi login vào views !-->
     <main>
          <Login />
     </main>

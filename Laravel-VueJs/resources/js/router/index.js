@@ -11,6 +11,7 @@ const routes = [
         component: Register,
     },
     {
+        //tạo router /login
         name: "login",
         path: "/login",
         component: Login,

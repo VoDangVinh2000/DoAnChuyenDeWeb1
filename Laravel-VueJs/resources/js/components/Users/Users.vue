@@ -1,4 +1,5 @@
 <template>
+    <!-- Component users xử lý hiển thị danh sách users !-->
   <tr class="show-info" v-for="user in users.data" :key="user.id">
     <td>
       <p>{{ user.id }}</p>
@@ -74,6 +75,7 @@ export default {
 </script>
 
 <style scoped>
+
 .show-info p {
   overflow: auto;
   margin-bottom: 0;
