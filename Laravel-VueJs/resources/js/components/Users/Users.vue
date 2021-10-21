@@ -17,7 +17,7 @@
       <a href="/edit" class="edit" @click.prevent="edit(user.id)">
         <i class="fas fa-user-edit"></i>
       </a>
-      <a href="/delete" class="delete" @click.prevent="deleteUser(user.id)">
+      <a href="/delete" class="delete" @click.prevent="deleteUser(user.id, user.email)">
         <i class="fas fa-trash-alt"></i>
       </a>
     </td>
@@ -38,7 +38,9 @@ import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 export default {
   name: "Users.vue",
   data() {
-    return {};
+    return {
+       
+    };
   },
   components: {
     VPagination,
@@ -53,15 +55,22 @@ export default {
     edit(id) {
       window.location.href = "edit/" + id;
     },
-    deleteUser(id) {
-      axios
-        .post("/delete/" + id + "", {})
-        .then((response) => {
-          console.log(response.data);
-        });
-        const index = this.users.data.indexOf(id);
-        this.users.data.splice(index, 1);
 
+    deleteUser(id,email) {
+      let data = JSON.parse(localStorage.getItem("user"));
+      let newData = data.data.value[0].email;
+ 
+      if(newData == email){
+        alert("Bạn không thể xóa tài khoản này!!")
+      }
+      else{
+        axios.post("/delete/" + id + "", {}).then((response) => {
+        console.log(response.data);
+      });
+      const index = this.users.data.indexOf(id);
+      this.users.data.splice(index, 1);
+      alert("Xóa thành công!!");
+      }
     },
   },
   props: {
