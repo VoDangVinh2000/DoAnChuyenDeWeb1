@@ -25,9 +25,11 @@
                 <span class="input-group-addon"
                   ><i class="fa fa-user fa" aria-hidden="true"></i
                 ></span>
+                
+                //v-model lưu dữ liệu người dùng vào Object rỗng
                 <input
                   type="text"
-                  v-model="users.name"
+                  v-model="users.name" 
                   class="form-control"
                   name="name"
                   id="name"
@@ -146,6 +148,7 @@ export default {
   name: "Register.vue",
   data() {
     return {
+      //tạo Object rỗng để lấy dữ liệu người nhập từ v-model
       users: {
         name: "",
         email: "",
@@ -168,6 +171,7 @@ export default {
         let confirmGray = document.querySelector("#confirm").style.border = "1px solid #ced4da";
 
         //Axios
+      //lấy dữ liệu người dùng nhập
       axios
         .post("/register_test", {
           name: this.users.name,
