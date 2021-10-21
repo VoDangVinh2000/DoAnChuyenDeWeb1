@@ -40,4 +40,4 @@ Route::post('register_test', [UserController::class,'store'])->name('register.st
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
 Route::post('/edit-user/{id}',[UserController::class,'update']);
-Route::post('/delete/{id}',[UserController::class,'destroy']);
+Route::post('/delete/{id}',[UserController::class,'destroy']); // route delete

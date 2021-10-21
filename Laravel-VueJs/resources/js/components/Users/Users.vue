@@ -16,7 +16,7 @@
       <a href="/edit" class="edit" @click.prevent="edit(user.id)">
         <i class="fas fa-user-edit"></i>
       </a>
-      <a href="/delete" class="delete" @click.prevent="deleteUser(user.id, user.email)">
+      <a href="/delete" class="delete" @click.prevent="deleteUser(user.id, user.email)"> <!-- bắt sự kiện -->
         <i class="fas fa-trash-alt"></i>
       </a>
     </td>
@@ -37,7 +37,7 @@ export default {
   name: "Users.vue",
   data() {
     return {
-       
+
     };
   },
   components: {
@@ -57,7 +57,7 @@ export default {
     deleteUser(id,email) {
       let data = JSON.parse(localStorage.getItem("user"));
       let newData = data.data.value[0].email;
- 
+
       if(newData == email){
         alert("Bạn không thể xóa tài khoản này!!")
       }
