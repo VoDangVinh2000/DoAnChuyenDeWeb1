@@ -78,6 +78,8 @@ export default {
                 password: this.user.password,
             })
             .then((response) => {
+              //thông báo cập nhật user thành công
+              alert("cập nhật user thành công");
                 console.log(response.data);
             })
               window.location.href = "/home";

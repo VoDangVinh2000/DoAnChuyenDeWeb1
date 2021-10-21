@@ -39,5 +39,5 @@ Route::fallback(function(){
 Route::post('register_test', [UserController::class,'store'])->name('register.store');
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
-Route::post('/edit-user/{id}',[UserController::class,'update']);
+Route::post('/edit-user/{id}',[UserController::class,'update']);//xử lý User tại hàm update thuộc file UserController
 Route::post('/delete/{id}',[UserController::class,'destroy']);

@@ -85,6 +85,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * Cập nhật User theo id
      */
     public function update(Request $request,$id)
     {
