@@ -6,6 +6,7 @@ import Home from "../views/Home.vue";
 import EditUser from "../views/EditUser.vue";
 const routes = [
     {
+        /* Tạo routes trong vuejs */
         name: "regsiter",
         path: "/register",
         component: Register,

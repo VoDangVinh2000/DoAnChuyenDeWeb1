@@ -9,6 +9,7 @@
       </div>
       <div class="main-login main-center">
         <form class="form-horizontal" method="post">
+            <!-- Hiên thị thông báo lỗi khi người dùng nhập sai -->
           <label class="label label-success" v-if="check"
             >Sign Up Success</label>
             <div class="error" v-if="errors.length" >
@@ -16,6 +17,7 @@
                     {{err}}
                 </span>
             </div>
+            <!-- Kết thúc hiển thị thông báo lỗi -->
           <div class="form-group">
             <label for="name" class="cols-sm-2 control-label">Your Name</label>
             <div class="cols-sm-10">
@@ -151,6 +153,7 @@ export default {
         password: "",
         password_confirmation: "",
       },
+       /* Kiểm tra validate và hiển thị thông báo lỗi */
       check: false,
       errors: []
     };
@@ -173,6 +176,7 @@ export default {
           password: this.users.password,
           password_confirmation: this.users.password_confirmation,
         })
+        /* Nhập dữ liệu thành công và set lỗi về null */
         .then((response) => {
             (this.check = true),
             this.errors = [null];
@@ -184,6 +188,7 @@ export default {
             passGray;
             confirmGray;
         })
+        /* Bắt lỗi khi người dùng nhập sai yêu cầu  */
         .catch(error => {
             this.check = false;
             if(error.response.data.errors.name){

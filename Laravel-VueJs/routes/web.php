@@ -18,9 +18,11 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+/* Hiển thị giao diện register */
 Route::get('/register',function(){
     return view('layouts.auth.register');
 });
+
 Route::get('/login',function(){
     return view('layouts.auth.login');
 });

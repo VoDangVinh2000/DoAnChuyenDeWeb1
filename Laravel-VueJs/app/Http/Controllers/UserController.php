@@ -37,6 +37,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     /* Nhận dữ liệu và xử lí validate */
     public function store(Request $request)
     {
         $this->validate($request, [
