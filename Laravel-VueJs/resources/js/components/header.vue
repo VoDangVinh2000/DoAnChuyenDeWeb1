@@ -19,6 +19,7 @@
 export default {
     name : 'Header.vue',
     methods: {
+        //đăng xuất - xóa token và quay về login
         logout(){
             localStorage.removeItem('user');
             var user = localStorage.getItem('user');
