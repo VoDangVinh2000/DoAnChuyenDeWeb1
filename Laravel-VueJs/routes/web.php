@@ -30,6 +30,7 @@ Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });
 
+//tao router view
 Route::get('/delete/{id}',function(){
     return view('/home');
 });
