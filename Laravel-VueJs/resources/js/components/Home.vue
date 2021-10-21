@@ -28,6 +28,7 @@
 import Header from './Header';
 import Footer from './Footer';
 import Users from './Users/Users';
+
 export default {
     name : 'Home.vue',
     components : {
@@ -52,7 +53,7 @@ export default {
             const response = await fetch(url);
             const data = await response.json();
             return data;
-        }
+        },
     }
 }
 
