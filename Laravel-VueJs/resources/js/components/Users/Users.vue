@@ -22,6 +22,7 @@
       </a>
     </td>
   </tr>
+  <!-- pagination !-->
   <v-pagination
     v-model="currentPage"
     :pages="lastPage"
