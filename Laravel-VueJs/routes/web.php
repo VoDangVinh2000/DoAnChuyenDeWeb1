@@ -25,7 +25,7 @@ Route::get('/login',function(){
     return view('layouts.auth.login');
 });
 
-
+/* Lấy ID user */
 Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });

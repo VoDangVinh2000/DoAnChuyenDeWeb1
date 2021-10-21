@@ -5,6 +5,7 @@
     <main class="bg-dark">
       <form method="post">
         <input type="hidden" name="id" />
+        <!-- v-model: hiển thị thông tin cần update -->
         <div class="form-group">
           <label for="name">Name</label>
           <input class="form-control" name="name" placeholder="name" v-model="user.name" />
@@ -42,6 +43,7 @@ export default {
   },
   data() {
     return {
+        //Tạo object rỗng để lưu dữ liệu
       user: {
         name: "",
         email: "",
@@ -51,6 +53,7 @@ export default {
       },
     };
   },
+  //Xử lý khi không nhận đc id sẽ đưa về trang hôm
   mounted() {
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
@@ -65,6 +68,7 @@ export default {
     });
   },
     methods: {
+        // Lấy dữ liệu sau khi người dùng đã sửa
         updateUser(){
             axios
             .post("/edit-user/"+this.user.id+"", {
