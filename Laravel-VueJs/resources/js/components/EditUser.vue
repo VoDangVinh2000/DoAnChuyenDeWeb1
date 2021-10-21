@@ -1,4 +1,5 @@
 <template>
+<!-- use header -->
   <Header />
   <div class="container">
     <h1 class="title">Update</h1>
@@ -29,6 +30,7 @@
       </form>
     </main>
   </div>
+   <!-- use footer -->
   <Footer />
 </template>
 <script>

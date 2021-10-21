@@ -1,5 +1,6 @@
 <template>
-    <Header/>
+<!-- use header -->
+    <Header/> 
     <div class="container">
         <main>
             <!-- list view users !-->
@@ -22,6 +23,7 @@
             </table>
         </main>
     </div>
+    <!-- use footer -->
     <Footer/>
 </template>
 
