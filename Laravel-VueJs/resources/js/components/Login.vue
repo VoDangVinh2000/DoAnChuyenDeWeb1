@@ -6,7 +6,7 @@
       <div class="main-center">
         <p style="color: red" v-for="mess in mess_validation" :key="mess">{{ mess }}</p>
         <p style="color: red" id="mess_validation"></p>
-        <!-- Form Login !-->
+        <!-- Khang Form Login !-->
         <form>
           <div class="form-group">
             <label>Email address</label>
