@@ -54,6 +54,7 @@ export default {
       window.location.href = "edit/" + id;
     },
 
+    //xử lí front-end và không cho xóa user đăng nhập
     deleteUser(id,email) {
       let data = JSON.parse(localStorage.getItem("user"));
       let newData = data.data.value[0].email;

@@ -30,7 +30,6 @@ Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });
 
-
 Route::fallback(function(){
     return redirect('/home');
 });
