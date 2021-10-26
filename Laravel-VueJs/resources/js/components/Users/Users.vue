@@ -1,5 +1,5 @@
 <template>
-    <!-- component users !-->
+    <!--component users!-->
   <tr class="show-info" v-for="user in users.data" :key="user.id">
     <td>
       <p>{{ user.id }}</p>
@@ -39,7 +39,7 @@ export default {
   name: "Users.vue",
   data() {
     return {
-       
+
     };
   },
   components: {
@@ -59,7 +59,7 @@ export default {
     deleteUser(id,email) {
       let data = JSON.parse(localStorage.getItem("user"));
       let newData = data.data.value[0].email;
- 
+
       if(newData == email){
         alert("Bạn không thể xóa tài khoản này!!")
       }
