@@ -31,9 +31,7 @@ Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });
 
-Route::get('/delete/{id}',function(){
-    return view('/home');
-});
+
 Route::fallback(function(){
     return redirect('/home');
 });
