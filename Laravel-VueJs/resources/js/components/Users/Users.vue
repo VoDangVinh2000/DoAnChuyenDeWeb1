@@ -49,7 +49,7 @@ export default {
       this.users.data = data.data;
     },
     edit(id) {
-      window.location.href = "edit/" + id;
+      window.location.href = "edit/" + btoa(id);
     },
     deleteUser(id) {
       axios

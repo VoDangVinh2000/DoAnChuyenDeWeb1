@@ -19796,7 +19796,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
-    var value_indexOf = current_url.substr(indexOf + 1);
+    var value_indexOf = atob(current_url.substr(indexOf + 1));
     current_url = "/api/user-id/" + value_indexOf;
     axios.get(current_url).then(function (response) {
       if (response.data.id) {
@@ -20204,7 +20204,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     edit: function edit(id) {
-      window.location.href = "edit/" + id;
+      window.location.href = "edit/" + btoa(id);
     },
     deleteUser: function deleteUser(id) {
       axios.post("/delete/" + id + "", {}).then(function (response) {

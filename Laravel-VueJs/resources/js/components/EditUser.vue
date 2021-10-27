@@ -57,7 +57,7 @@ export default {
   mounted() {
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
-    var value_indexOf = current_url.substr(indexOf + 1);
+    var value_indexOf = atob(current_url.substr(indexOf + 1));
     current_url = "/api/user-id/" + value_indexOf;
     axios.get(current_url).then((response) => {
       if (response.data.id) {
