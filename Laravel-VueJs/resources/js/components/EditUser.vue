@@ -8,22 +8,49 @@
         <!-- v-model: hiển thị thông tin cần update -->
         <div class="form-group">
           <label for="name">Name</label>
-          <input class="form-control" name="name" placeholder="name" v-model="user.name" />
+          <input
+            class="form-control"
+            name="name"
+            placeholder="name"
+            v-model="user.name"
+          />
         </div>
         <div class="form-group">
           <label for="username">User Name</label>
-          <input class="form-control" name="username" placeholder="username" v-model="user.username"/>
+          <input
+            class="form-control"
+            name="username"
+            placeholder="username"
+            v-model="user.username"
+          />
         </div>
         <div class="form-group">
           <label for="Email">Email</label>
-          <input class="form-control" name="email" placeholder="email" v-model="user.email" />
+          <input
+            class="form-control"
+            name="email"
+            placeholder="email"
+            v-model="user.email"
+          />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" class="form-control" placeholder="Password" v-model="user.password" />
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="user.password"
+          />
         </div>
         <div class="form-group-btn">
-          <button type="submit" name="submit" value="submit" class="btn btn-outline-info" @click.prevent="updateUser" >
+          <button
+            type="submit"
+            name="submit"
+            value="submit"
+            class="btn btn-outline-info"
+            @click.prevent="updateUser"
+          >
             Update
           </button>
         </div>
@@ -43,17 +70,18 @@ export default {
   },
   data() {
     return {
-        //Tạo object rỗng để lưu dữ liệu
+      //Tạo object rỗng để lưu dữ liệu
       user: {
         name: "",
         email: "",
         username: "",
         password: "",
         password_confirmation: "",
+        version: null,
       },
     };
   },
-  //Xử lý khi không nhận đc id sẽ đưa về trang hôm
+  //Xử lý khi không nhận đc id sẽ đưa về trang home
   mounted() {
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
@@ -67,24 +95,28 @@ export default {
       }
     });
   },
-    methods: {
-        // Lấy dữ liệu sau khi người dùng đã sửa
-        updateUser(){
-            axios
-            .post("/edit-user/"+this.user.id+"", {
-                name: this.user.name,
-                email: this.user.email,
-                username: this.user.username,
-                password: this.user.password,
-            })
-            .then((response) => {
-              //thông báo cập nhật user thành công
-              alert("cập nhật user thành công");
-                console.log(response.data);
-            })
-              window.location.href = "/home";
-        }
-    }
+  methods: {
+    // Lấy dữ liệu sau khi người dùng đã sửa
+    updateUser() {
+      axios
+        .post("/edit-user/" + this.user.id + "", {
+          name: this.user.name,
+          email: this.user.email,
+          username: this.user.username,
+          password: this.user.password,
+          version: this.user.version,
+        })
+        .then((response) => {
+              let newDa = JSON.parse(response.config.data);
+              //data người dùng ms update
+              console.log(newDa);
+              //data mới
+              console.log(response.data);
+
+        });
+        window.location.href = "/home";
+    },
+  },
 };
 </script>
 <style scoped>
