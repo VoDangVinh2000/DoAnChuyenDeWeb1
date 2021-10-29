@@ -150,6 +150,7 @@ export default {
         username: "",
         password: "",
         password_confirmation: "",
+        version: 1,
       },
       check: false,
       errors: []
@@ -172,6 +173,7 @@ export default {
           username: this.users.username,
           password: this.users.password,
           password_confirmation: this.users.password_confirmation,
+          version: this.users.version,
         })
         .then((response) => {
             (this.check = true),

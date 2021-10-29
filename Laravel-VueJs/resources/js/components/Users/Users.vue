@@ -60,6 +60,7 @@ export default {
         const index = this.users.data.indexOf(id);
         this.users.data.splice(index, 1);
 
+        window.location.href = "/home";
     },
   },
   props: {

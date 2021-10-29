@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use phpDocumentor\Reflection\Location;
+
 class UserController extends Controller
 {
     /**
@@ -51,6 +54,7 @@ class UserController extends Controller
             'username'    => $request->input('username'),
             'password'    => md5($request->input('password')),
             'password_confirmation'    => md5($request->input('password_confirmation')),
+            'version' => $request->input('version'),
         ]);
         return response([
             'users' => $user
@@ -89,14 +93,23 @@ class UserController extends Controller
      */
     public function update(Request $request,$id)
     {
-         $name = $request->input('name');
-         $user_name = $request->input('username');
-         $email =  $request->input('email');
-         $pass =  $request->input('password');
+        $user = User::find($id);
+        $ver = $user['version'];
+        $verNew = $request->input('version');
+        if($ver == $verNew){
+            $name = $request->input('name');
+            $user_name = $request->input('username');
+            $email =  $request->input('email');
+            $pass =  $request->input('password');
+            $version = $request->input('version')+1;
 
-         DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ? where id = ?',
-         [$name,$user_name, $email,md5($pass), md5($pass),$id]);
-         var_dump("cap nhat thanh cong");
+            DB::update('update users set name = ?, username = ?, email = ?, password = ?, password_confirmation = ?, version = ? where id = ?',
+            [$name,$user_name, $email,md5($pass), md5($pass),$version,$id]);
+            $request->session()->flash('statusTrue', 'Update successful!');
+        }
+        else{
+            $request->session()->flash('statusFalse', 'Update failed due to modified data!!!');
+        }
     }
 
     /**
@@ -105,10 +118,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $user = User::find($id);
-        $user->delete();
+        if(!$user){
+            $request->session()->flash('statusFalse', 'Delete failed due to modified data!!!');
+        }
+        else{
+            $user->delete();
+            $request->session()->flash('statusTrue', 'Delete successful!');
+        }
+
         return response()->json(" successfully deleted ");
     }
 
