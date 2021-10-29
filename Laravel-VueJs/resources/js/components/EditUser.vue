@@ -88,7 +88,7 @@ export default {
     var value_indexOf = atob(current_url.substr(indexOf + 1));
     value_indexOf = value_indexOf.substr(-20, 1);
     current_url = "/api/user-id/" + value_indexOf;
- 
+
     axios.get(current_url).then((response) => {
       if (response.data.id) {
         this.user = response.data;
@@ -109,14 +109,23 @@ export default {
           version: this.user.version,
         })
         .then((response) => {
-              let newDa = JSON.parse(response.config.data);
+             let newDa = JSON.parse(response.config.data);
               //data người dùng ms update
               console.log(newDa);
               //data mới
               console.log(response.data);
-
+              //cập nhật
+              const title = document.querySelector('.title');
+              title.style.color = 'green';
+              title.innerHTML = `Đang cập nhật...`;
+              var time = setTimeout(function (){
+                  title.innerHTML = `Đã cập nhật xong`;
+              },1500);
         });
-        window.location.href = "/home";
+        //sau 3s cập nhật
+        var timer = setTimeout(function() {
+            window.location.href = "/home";
+        }, 3000);
     },
   },
 };
