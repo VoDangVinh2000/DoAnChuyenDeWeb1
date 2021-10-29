@@ -58,12 +58,14 @@ export default {
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
     var value_indexOf = atob(current_url.substr(indexOf + 1));
+    value_indexOf = value_indexOf.substr(-20, 1);
     current_url = "/api/user-id/" + value_indexOf;
+ 
     axios.get(current_url).then((response) => {
       if (response.data.id) {
         this.user = response.data;
       } else {
-        window.location.href = "/home";
+       // window.location.href = "/home";
       }
     });
   },

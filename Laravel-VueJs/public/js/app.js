@@ -19797,12 +19797,12 @@ __webpack_require__.r(__webpack_exports__);
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
     var value_indexOf = atob(current_url.substr(indexOf + 1));
+    value_indexOf = value_indexOf.substr(-20, 1);
     current_url = "/api/user-id/" + value_indexOf;
     axios.get(current_url).then(function (response) {
       if (response.data.id) {
         _this.user = response.data;
-      } else {
-        window.location.href = "/home";
+      } else {// window.location.href = "/home";
       }
     });
   },
@@ -20204,7 +20204,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     edit: function edit(id) {
-      window.location.href = "edit/" + btoa(id);
+      window.location.href = "edit/" + btoa(id + "123");
     },
     deleteUser: function deleteUser(id) {
       axios.post("/delete/" + id + "", {}).then(function (response) {
