@@ -63,7 +63,7 @@ export default {
         alert("Bạn không thể xóa tài khoản này!!")
       }
       else{
-        axios.post("/delete/" + id + "", {}).then((response) => {
+        axios.post("/delete/" + atob(id) + "", {}).then((response) => {
         console.log(response.data);
       });
       const index = this.users.data.indexOf(id);

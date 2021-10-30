@@ -107,6 +107,7 @@ class UserController extends Controller
     //func delete
     public function destroy($id)
     {
+        $id = base64_decode($id);
         $user = User::find($id);
         $user->delete();
         return response()->json(" successfully deleted ");
