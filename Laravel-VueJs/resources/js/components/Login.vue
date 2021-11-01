@@ -61,6 +61,9 @@
     if (token != null) {
       window.location.href = "/home";
     }
+    else{
+
+    }
   },
   methods: {
     validateEmail(email) {
