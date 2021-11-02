@@ -1,10 +1,12 @@
 <template>
+ <!-- Login ^-^ !-->
   <div class="vue-tempalte">
     <div class="container">
       <h1 class="title">Log In</h1>
       <div class="main-center">
         <p style="color: red" v-for="mess in mess_validation" :key="mess">{{ mess }}</p>
         <p style="color: red" id="mess_validation"></p>
+        <!-- Form Login !-->
         <form>
           <div class="form-group">
             <label>Email address</label>
@@ -101,7 +103,7 @@
                 response.data = response.data.map(item => item.id != 0 ? {...item,token : token_user} : item);
                 let obj = {
                     'data' : {
-                        time: new Date().getTime() + (1 * 3600 * 1000),
+                        time: new Date().getTime() + (60 * 1000),
                         value: response.data,
                     }
                 };
