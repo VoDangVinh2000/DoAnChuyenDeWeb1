@@ -25,11 +25,10 @@
                 <span class="input-group-addon"
                   ><i class="fa fa-user fa" aria-hidden="true"></i
                 ></span>
-                
-                //v-model lưu dữ liệu người dùng vào Object rỗng
+
                 <input
                   type="text"
-                  v-model="users.name" 
+                  v-model="users.name"
                   class="form-control"
                   name="name"
                   id="name"

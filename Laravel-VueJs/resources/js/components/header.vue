@@ -6,7 +6,7 @@
                 style="width: 70px; height: 70px"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9iRz0GPSTPBc9ZeGpO-BLWwcAmUy2Xv1XyQ&usqp=CAU"
             />
-            <h1>Nhóm D dễ thương nhất quả đất</h1>
+            <h1>Nhóm D</h1>
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <button type="button" class="btn btn-outline-success">
