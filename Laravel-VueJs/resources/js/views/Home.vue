@@ -15,6 +15,7 @@ export default {
         Home
     },
     mounted() {
+        //Check expire token of user
         var user = JSON.parse(localStorage.getItem('user'));
         if(user == null){
             this.load = false;
