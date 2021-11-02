@@ -1,5 +1,6 @@
 <template>
     <!-- Component users xử lý hiển thị danh sách users !-->
+    <!--component users!-->
   <tr class="show-info" v-for="user in users.data" :key="user.id">
     <td>
       <p>{{ user.id }}</p>
@@ -22,6 +23,7 @@
       </a>
     </td>
   </tr>
+  <!-- pagination !-->
   <v-pagination
     v-model="currentPage"
     :pages="lastPage"
@@ -75,6 +77,7 @@ export default {
     },
   },
   props: {
+    //props of users
     users: Object,
     stt: Number,
     currentPage: Number,

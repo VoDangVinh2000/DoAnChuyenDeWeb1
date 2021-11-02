@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/all-user',[UserController::class,'index']);
+Route::get('/all-user',[UserController::class,'index']);//Lấy danh sách users với api
 
-Route::get('/user-id/{id}',[UserController::class,'show']);
+Route::get('/user-id/{id}',[UserController::class,'show']);//Tìm user với api
