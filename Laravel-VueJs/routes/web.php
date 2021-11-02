@@ -28,7 +28,7 @@ Route::get('/login',function(){
     return view('layouts.auth.login');
 });
 
-
+/* Lấy ID user */
 Route::get('/edit/{id}',function(){
     return view('app.edituser');
 });
@@ -40,5 +40,5 @@ Route::fallback(function(){
 Route::post('register_test', [UserController::class,'store'])->name('register.store');//tạo route để gửi dữ liệu qua UserController
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
-Route::post('/edit-user/{id}',[UserController::class,'update']);
-Route::post('/delete/{id}',[UserController::class,'destroy']); // route delete
+Route::post('/edit-user/{id}',[UserController::class,'update']);//xử lý User tại hàm update thuộc file UserController
+Route::post('/delete/{id}',[UserController::class,'destroy']);

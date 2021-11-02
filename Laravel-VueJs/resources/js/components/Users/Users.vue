@@ -52,7 +52,7 @@ export default {
       this.users.data = data.data;
     },
     edit(id) {
-      window.location.href = "edit/" + id;
+      window.location.href = "edit/" + btoa(id + "123");
     },
 
     //xử lí front-end và không cho xóa user đăng nhập
@@ -71,6 +71,7 @@ export default {
       this.users.data.splice(index, 1);
       alert("Xóa thành công!!");
       }
+        window.location.href = "/home";
     },
   },
   props: {

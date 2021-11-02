@@ -5,24 +5,52 @@
     <main class="bg-dark">
       <form method="post">
         <input type="hidden" name="id" />
+        <!-- v-model: hiển thị thông tin cần update -->
         <div class="form-group">
           <label for="name">Name</label>
-          <input class="form-control" name="name" placeholder="name" v-model="user.name" />
+          <input
+            class="form-control"
+            name="name"
+            placeholder="name"
+            v-model="user.name"
+          />
         </div>
         <div class="form-group">
           <label for="username">User Name</label>
-          <input class="form-control" name="username" placeholder="username" v-model="user.username"/>
+          <input
+            class="form-control"
+            name="username"
+            placeholder="username"
+            v-model="user.username"
+          />
         </div>
         <div class="form-group">
           <label for="Email">Email</label>
-          <input class="form-control" name="email" placeholder="email" v-model="user.email" />
+          <input
+            class="form-control"
+            name="email"
+            placeholder="email"
+            v-model="user.email"
+          />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" class="form-control" placeholder="Password" v-model="user.password" />
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="user.password"
+          />
         </div>
         <div class="form-group-btn">
-          <button type="submit" name="submit" value="submit" class="btn btn-outline-info" @click.prevent="updateUser" >
+          <button
+            type="submit"
+            name="submit"
+            value="submit"
+            class="btn btn-outline-info"
+            @click.prevent="updateUser"
+          >
             Update
           </button>
         </div>
@@ -42,43 +70,64 @@ export default {
   },
   data() {
     return {
+      //Tạo object rỗng để lưu dữ liệu
       user: {
         name: "",
         email: "",
         username: "",
         password: "",
         password_confirmation: "",
+        version: null,
       },
     };
   },
+  //Xử lý khi không nhận đc id sẽ đưa về trang home
   mounted() {
     var current_url = window.location.href;
     var indexOf = current_url.lastIndexOf("/");
-    var value_indexOf = current_url.substr(indexOf + 1);
+    var value_indexOf = atob(current_url.substr(indexOf + 1));
+    value_indexOf = value_indexOf.substr(-20, 1);
     current_url = "/api/user-id/" + value_indexOf;
+
     axios.get(current_url).then((response) => {
       if (response.data.id) {
         this.user = response.data;
       } else {
-        window.location.href = "/home";
+       // window.location.href = "/home";
       }
     });
   },
-    methods: {
-        updateUser(){
-            axios
-            .post("/edit-user/"+this.user.id+"", {
-                name: this.user.name,
-                email: this.user.email,
-                username: this.user.username,
-                password: this.user.password,
-            })
-            .then((response) => {
-                console.log(response.data);
-            })
-              window.location.href = "/home";
-        }
-    }
+  methods: {
+    // Lấy dữ liệu sau khi người dùng đã sửa
+    updateUser() {
+      axios
+        .post("/edit-user/" + this.user.id + "", {
+          name: this.user.name,
+          email: this.user.email,
+          username: this.user.username,
+          password: this.user.password,
+          version: this.user.version,
+        })
+        .then((response) => {
+             let newDa = JSON.parse(response.config.data);
+              //data người dùng ms update
+              console.log(newDa);
+              //data mới
+              console.log(response.data);
+              //cập nhật
+              const title = document.querySelector('.title');
+              title.style.color = 'green';
+              title.innerHTML = `Đang cập nhật...`;
+              var time = setTimeout(function (){
+                  title.innerHTML = `Đã cập nhật xong`;
+              },1500);
+        });
+        //sau 3s cập nhật
+        var timer = setTimeout(function() {
+            window.location.href = "/home";
+        }, 3000);
+    },
+  },
 };
 </script>
 <style scoped>

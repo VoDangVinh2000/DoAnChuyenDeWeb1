@@ -155,6 +155,7 @@ export default {
         username: "",
         password: "",
         password_confirmation: "",
+        version: 1,
       },
        /* Kiểm tra validate và hiển thị thông báo lỗi */
       check: false,
@@ -179,6 +180,7 @@ export default {
           username: this.users.username,
           password: this.users.password,
           password_confirmation: this.users.password_confirmation,
+          version: this.users.version,
         })
         /* Nhập dữ liệu thành công và set lỗi về null */
         .then((response) => {
