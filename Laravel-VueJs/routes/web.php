@@ -19,9 +19,11 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+/* Hiển thị giao diện register */
 Route::get('/register',function(){
     return view('layouts.auth.register');
 });
+
 Route::get('/login',function(){
     return view('layouts.auth.login');
 });
@@ -35,7 +37,7 @@ Route::get('/edit/{id}',function(){
 Route::fallback(function(){
     return redirect('/home');
 });
-Route::post('register_test', [UserController::class,'store'])->name('register.store');
+Route::post('register_test', [UserController::class,'store'])->name('register.store');//tạo route để gửi dữ liệu qua UserController
 Route::post('/login',[UserController::class,'login']);
 Route::get('/home',[UserController::class,'index']);
 Route::post('/edit-user/{id}',[UserController::class,'update']);

@@ -9,6 +9,7 @@
       </div>
       <div class="main-login main-center">
         <form class="form-horizontal" method="post">
+            <!-- Hiên thị thông báo lỗi khi người dùng nhập sai -->
           <label class="label label-success" v-if="check"
             >Sign Up Success</label>
             <div class="error" v-if="errors.length" >
@@ -16,6 +17,7 @@
                     {{err}}
                 </span>
             </div>
+            <!-- Kết thúc hiển thị thông báo lỗi -->
           <div class="form-group">
             <label for="name" class="cols-sm-2 control-label">Your Name</label>
             <div class="cols-sm-10">
@@ -23,9 +25,11 @@
                 <span class="input-group-addon"
                   ><i class="fa fa-user fa" aria-hidden="true"></i
                 ></span>
+                
+                //v-model lưu dữ liệu người dùng vào Object rỗng
                 <input
                   type="text"
-                  v-model="users.name"
+                  v-model="users.name" 
                   class="form-control"
                   name="name"
                   id="name"
@@ -144,6 +148,7 @@ export default {
   name: "Register.vue",
   data() {
     return {
+      //tạo Object rỗng để lấy dữ liệu người nhập từ v-model
       users: {
         name: "",
         email: "",
@@ -151,6 +156,7 @@ export default {
         password: "",
         password_confirmation: "",
       },
+       /* Kiểm tra validate và hiển thị thông báo lỗi */
       check: false,
       errors: []
     };
@@ -165,6 +171,7 @@ export default {
         let confirmGray = document.querySelector("#confirm").style.border = "1px solid #ced4da";
 
         //Axios
+      //lấy dữ liệu người dùng nhập
       axios
         .post("/register_test", {
           name: this.users.name,
@@ -173,6 +180,7 @@ export default {
           password: this.users.password,
           password_confirmation: this.users.password_confirmation,
         })
+        /* Nhập dữ liệu thành công và set lỗi về null */
         .then((response) => {
             (this.check = true),
             this.errors = [null];
@@ -184,6 +192,7 @@ export default {
             passGray;
             confirmGray;
         })
+        /* Bắt lỗi khi người dùng nhập sai yêu cầu  */
         .catch(error => {
             this.check = false;
             if(error.response.data.errors.name){
