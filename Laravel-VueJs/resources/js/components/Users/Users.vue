@@ -69,7 +69,9 @@ export default {
       const index = this.users.data.indexOf(id);
       this.users.data.splice(index, 1);
       alert("Xóa thành công!!");
+      
       }
+       window.location.href = "/home";
     },
   },
   props: {
